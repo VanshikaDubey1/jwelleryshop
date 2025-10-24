@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useFormState } from 'react-dom';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -55,6 +55,7 @@ const initialState = {
 export function BookingForm() {
   const [state, formAction] = useFormState(submitBooking, initialState);
   const { toast } = useToast();
+  const [filePreview, setFilePreview] = useState<string[]>([]);
 
   const form = useForm<Booking>({
     resolver: zodResolver(BookingSchema),
@@ -103,6 +104,7 @@ export function BookingForm() {
       }
 
       form.reset();
+      setFilePreview([]);
     } else if (state.error) {
       toast({
         title: 'Booking Failed',
@@ -112,7 +114,22 @@ export function BookingForm() {
     }
   }, [state, form, toast]);
 
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files;
+    if (files) {
+      const newPreviews = Array.from(files).map(file => URL.createObjectURL(file));
+      setFilePreview(newPreviews);
+      form.setValue('photos', files);
+    }
+  };
+
   return (
+    <Card className="border-2 border-primary/10 shadow-lg">
+      <CardHeader>
+        <CardTitle className='font-headline text-2xl'>Your Order Details</CardTitle>
+        <CardDescription>Fill out the form to get started. All fields marked with * are required.</CardDescription>
+      </CardHeader>
+      <CardContent>
     <Form {...form}>
       <form
         action={formAction}
@@ -145,7 +162,7 @@ export function BookingForm() {
                 quantity: data.quantity,
                 delivery: data.deliveryOption,
                 address: data.address,
-                preferredDate: data.preferredDate,
+                preferredDate: data.preferredDate.toLocaleDateString(),
                 note: data.notes
               }),
               headers: {
@@ -167,7 +184,7 @@ export function BookingForm() {
               name="name"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Full Name</FormLabel>
+                  <FormLabel>Full Name *</FormLabel>
                   <FormControl>
                     <Input placeholder="John Doe" {...field} />
                   </FormControl>
@@ -181,7 +198,7 @@ export function BookingForm() {
                 name="phone"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Phone Number</FormLabel>
+                    <FormLabel>Phone Number *</FormLabel>
                     <FormControl>
                       <Input placeholder="+91 12345 67890" {...field} />
                     </FormControl>
@@ -209,7 +226,7 @@ export function BookingForm() {
               name="service"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Service</FormLabel>
+                  <FormLabel>Service *</FormLabel>
                   <Select
                     onValueChange={field.onChange}
                     defaultValue={field.value}
@@ -238,7 +255,7 @@ export function BookingForm() {
                 name="size"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Size / Variant</FormLabel>
+                    <FormLabel>Size / Variant *</FormLabel>
                     <FormControl>
                       <Input placeholder="e.g., 8x10, 12-inch" {...field} />
                     </FormControl>
@@ -251,7 +268,7 @@ export function BookingForm() {
                 name="quantity"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Quantity</FormLabel>
+                    <FormLabel>Quantity *</FormLabel>
                     <FormControl>
                       <Input type="number" min="1" {...field} />
                     </FormControl>
@@ -264,7 +281,7 @@ export function BookingForm() {
              <FormField
                 control={form.control}
                 name="photos"
-                render={({ field: { onChange, value, ...rest } }) => (
+                render={({ field }) => (
                   <FormItem>
                     <FormLabel>Upload Photos (Optional)</FormLabel>
                     <FormControl>
@@ -273,17 +290,23 @@ export function BookingForm() {
                                 type="file"
                                 multiple
                                 accept="image/*"
-                                className="w-full h-full opacity-0 absolute inset-0 cursor-pointer"
-                                onChange={(e) => onChange(e.target.files)}
-                                {...rest}
+                                className="w-full h-full opacity-0 absolute inset-0 cursor-pointer z-10"
+                                onChange={handleFileChange}
                             />
-                            <div className="border-2 border-dashed rounded-lg p-6 text-center cursor-pointer hover:bg-muted transition-colors">
+                            <div className="border-2 border-dashed rounded-lg p-6 text-center cursor-pointer hover:bg-muted/50 transition-colors">
                                 <UploadCloud className="mx-auto h-12 w-12 text-muted-foreground" />
                                 <p className="mt-2 text-sm text-muted-foreground">Click or drag to upload files</p>
-                                {value?.length > 0 && <p className="text-xs mt-2 text-primary">{value.length} file(s) selected</p>}
+                                {filePreview.length > 0 && <p className="text-xs mt-2 text-primary">{filePreview.length} file(s) selected</p>}
                             </div>
                         </div>
                     </FormControl>
+                     {filePreview.length > 0 && (
+                      <div className="grid grid-cols-3 sm:grid-cols-4 gap-2 mt-4">
+                        {filePreview.map((src, i) => (
+                           <img key={i} src={src} alt={`Preview ${i+1}`} className="w-full h-auto object-cover rounded-md aspect-square"/>
+                        ))}
+                      </div>
+                    )}
                     <FormMessage />
                   </FormItem>
                 )}
@@ -296,13 +319,13 @@ export function BookingForm() {
               control={form.control}
               name="deliveryOption"
               render={({ field }) => (
-                <FormItem className="space-y-3">
-                  <FormLabel>Delivery Option</FormLabel>
+                <FormItem className="space-y-3 rounded-lg border p-4 bg-muted/20">
+                  <FormLabel>Delivery Option *</FormLabel>
                   <FormControl>
                     <RadioGroup
                       onValueChange={field.onChange}
                       defaultValue={field.value}
-                      className="flex space-x-4"
+                      className="flex space-x-4 pt-2"
                     >
                       <FormItem className="flex items-center space-x-3 space-y-0">
                         <FormControl>
@@ -327,12 +350,13 @@ export function BookingForm() {
               )}
             />
             {deliveryOption === 'Delivery' && (
+              <div className='fade-in'>
               <FormField
                 control={form.control}
                 name="address"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Delivery Address</FormLabel>
+                    <FormLabel>Delivery Address *</FormLabel>
                     <FormControl>
                       <Textarea
                         placeholder="Your full delivery address"
@@ -344,13 +368,14 @@ export function BookingForm() {
                   </FormItem>
                 )}
               />
+              </div>
             )}
             <FormField
               control={form.control}
               name="preferredDate"
               render={({ field }) => (
                 <FormItem className="flex flex-col">
-                  <FormLabel>Preferred Pickup/Delivery Date</FormLabel>
+                  <FormLabel>Preferred Pickup/Delivery Date *</FormLabel>
                   <Popover>
                     <PopoverTrigger asChild>
                       <FormControl>
@@ -393,7 +418,7 @@ export function BookingForm() {
                   <FormControl>
                     <Textarea
                       placeholder="Any special instructions for your order..."
-                      className="resize-vertical"
+                      className="resize-vertical min-h-[100px]"
                       {...field}
                     />
   
@@ -406,7 +431,12 @@ export function BookingForm() {
         </div>
 
         <div className="flex justify-end pt-8">
-            <Button type="submit" size="lg" disabled={form.formState.isSubmitting}>
+            <Button 
+                type="submit" 
+                size="lg" 
+                disabled={form.formState.isSubmitting}
+                className="bg-primary text-primary-foreground hover:bg-foreground hover:text-background"
+                >
                 {form.formState.isSubmitting ? (
                     <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                 ) : (
@@ -417,5 +447,7 @@ export function BookingForm() {
         </div>
       </form>
     </Form>
+    </CardContent>
+    </Card>
   );
 }

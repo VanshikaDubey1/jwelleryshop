@@ -14,10 +14,10 @@ export default function BookingPage() {
                 <div className="container mx-auto px-4 sm:px-6 lg:px-8">
                     <PageHeader
                         title="Book Your Print Job"
-                        subtitle="Order Form"
-                        description="Fill out the form below to place your order. We'll get in touch with you to confirm the details and payment. Let's create something beautiful together!"
+                        subtitle="Let's Create Something Beautiful"
+                        description="Fill out the form below to place your order. We'll get in touch with you to confirm the details and payment."
                     />
-                    <div className="mt-12 max-w-4xl mx-auto">
+                    <div className="mt-12 max-w-5xl mx-auto">
                         <BookingForm />
                     </div>
                 </div>
