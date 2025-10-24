@@ -70,7 +70,22 @@ export function VisualizeInGallery() {
             photoDataUri: base64,
             galleryStyle: data.style,
           });
-          setResultImage(result.visualizedImage);
+
+          if (result.error) {
+             toast({
+              title: "Visualization Failed",
+              description: result.error,
+              variant: "destructive",
+            });
+          } else if (result.visualizedImage) {
+            setResultImage(result.visualizedImage);
+          } else {
+             toast({
+              title: "Error",
+              description: "Failed to visualize image. No image was returned.",
+              variant: "destructive",
+            });
+          }
         } catch (error) {
           console.error("AI visualization failed:", error);
           toast({

@@ -27,6 +27,7 @@ const VisualizeInGalleryOutputSchema = z.object({
   visualizedImage: z
     .string()
     .describe('The visualized image in data URI format.'),
+  error: z.string().optional(),
 });
 export type VisualizeInGalleryOutput = z.infer<typeof VisualizeInGalleryOutputSchema>;
 
@@ -60,17 +61,35 @@ const visualizeInGalleryFlow = ai.defineFlow(
     outputSchema: VisualizeInGalleryOutputSchema,
   },
   async input => {
-    const {media} = await ai.generate({
-      model: 'googleai/gemini-2.5-flash-image-preview',
-      prompt: [
-        {media: {url: input.photoDataUri}},
-        {text: `Visualize this photo as a ${input.galleryStyle} print.`},
-      ],
-      config: {
-        responseModalities: ['TEXT', 'IMAGE'],
-      },
-    });
+    try {
+      const {media} = await ai.generate({
+        model: 'googleai/gemini-2.5-flash-image-preview',
+        prompt: [
+          {media: {url: input.photoDataUri}},
+          {text: `Visualize this photo as a ${input.galleryStyle} print.`},
+        ],
+        config: {
+          responseModalities: ['TEXT', 'IMAGE'],
+        },
+      });
+      
+      if (!media?.url) {
+        return { visualizedImage: '', error: 'AI failed to generate an image.' };
+      }
 
-    return {visualizedImage: media!.url!};
+      return {visualizedImage: media.url};
+    } catch (error: any) {
+        console.error("AI visualization error:", error);
+        if (error.message && error.message.includes('429 Too Many Requests')) {
+            return {
+                visualizedImage: '',
+                error: 'Rate limit exceeded. Please check your plan and billing details, or try again later.'
+            };
+        }
+        return {
+            visualizedImage: '',
+            error: 'An unexpected error occurred during visualization.'
+        };
+    }
   }
 );
