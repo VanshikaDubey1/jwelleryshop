@@ -1,0 +1,21 @@
+{
+  "name": "Shreeji Photobooks",
+  "short_name": "Shreeji",
+  "description": "Your one-stop shop for professional photo printing, custom albums, and stunning acrylic prints in Kanpur. Turn your memories into art with Shreeji Photobooks.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#F5F5F6",
+  "theme_color": "#CBA13A",
+  "icons": [
+    {
+      "src": "/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

@@ -1,3 +1,100 @@
 {
-  "placeholderImages": []
+  "placeholderImages": [
+    {
+      "id": "hero-1",
+      "description": "A beautifully designed wedding photobook open on a wooden table.",
+      "imageUrl": "https://images.unsplash.com/photo-1677658288290-2913716d4d74?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHx3ZWRkaW5nJTIwYWxidW18ZW58MHx8fHwxNzYxMzE5MDI5fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "wedding album"
+    },
+    {
+      "id": "service-photo-printing",
+      "description": "A collection of high-quality photo prints scattered on a surface.",
+      "imageUrl": "https://images.unsplash.com/photo-1684741892637-c79b2e635921?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxwaG90byUyMHByaW50c3xlbnwwfHx8fDE3NjEzMTkwMjl8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "photo prints"
+    },
+    {
+      "id": "service-album-printing",
+      "description": "A close-up of a premium leather-bound photo album.",
+      "imageUrl": "https://images.unsplash.com/photo-1632679760635-55966a6e3d42?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxwaG90byUyMGFsYnVtfGVufDB8fHx8MTc2MTMxOTAyOXww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "photo album"
+    },
+    {
+      "id": "service-acrylic-printing",
+      "description": "A vibrant acrylic print of a landscape hanging on a modern wall.",
+      "imageUrl": "https://images.unsplash.com/photo-1655514484562-6d5aa13a3fd7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxhY3J5bGljJTIwcHJpbnR8ZW58MHx8fHwxNzYxMzE5MDI5fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "acrylic print"
+    },
+    {
+      "id": "gallery-album-1",
+      "description": "An open photo album showcasing travel memories.",
+      "imageUrl": "https://images.unsplash.com/photo-1512319490893-35324b7b770f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHx0cmF2ZWwlMjBhbGJ1bXxlbnwwfHx8fDE3NjEzMTkwMjl8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "travel album"
+    },
+    {
+      "id": "gallery-album-2",
+      "description": "A family photo album filled with pictures.",
+      "imageUrl": "https://images.unsplash.com/photo-1684741892777-f8e824722ceb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxmYW1pbHklMjBhbGJ1bXxlbnwwfHx8fDE3NjEzMTkwMjl8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "family album"
+    },
+    {
+      "id": "gallery-album-3",
+      "description": "A sleek, modern wedding album with a minimalist cover.",
+      "imageUrl": "https://images.unsplash.com/photo-1675186253268-d37cf7f95719?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHx3ZWRkaW5nJTIwYWxidW18ZW58MHx8fHwxNzYxMzE5MDI5fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "wedding album"
+    },
+    {
+      "id": "gallery-acrylic-1",
+      "description": "An acrylic print of a colorful abstract design.",
+      "imageUrl": "https://images.unsplash.com/photo-1533158388470-9a56699990c6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxhYnN0cmFjdCUyMGFydHxlbnwwfHx8fDE3NjEyOTIwMzl8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "abstract art"
+    },
+    {
+      "id": "gallery-acrylic-2",
+      "description": "A stunning portrait photo printed on acrylic.",
+      "imageUrl": "https://images.unsplash.com/photo-1650056200016-70c0cb987ce7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxMHx8cG9ydHJhaXQlMjBhY3J5bGljfGVufDB8fHx8MTc2MTMxOTAyOXww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "portrait acrylic"
+    },
+    {
+      "id": "gallery-wallframe-1",
+      "description": "A collection of framed family photos creating a gallery wall.",
+      "imageUrl": "https://images.unsplash.com/photo-1614649242291-2db473756432?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxMHx8Z2FsbGVyeSUyMHdhbGx8ZW58MHx8fHwxNzYxMjc5MjU1fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "gallery wall"
+    },
+    {
+      "id": "gallery-wallframe-2",
+      "description": "A single, large framed landscape photo above a sofa.",
+      "imageUrl": "https://images.unsplash.com/photo-1694287796165-9c82940081be?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxmcmFtZWQlMjBsYW5kc2NhcGV8ZW58MHx8fHwxNzYxMzE5MDI5fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "framed landscape"
+    },
+    {
+      "id": "gallery-wallframe-3",
+      "description": "Minimalist black frames with black and white photos.",
+      "imageUrl": "https://images.unsplash.com/photo-1629576350035-8ccec375adcd?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHxtaW5pbWFsaXN0JTIwZnJhbWVzfGVufDB8fHx8MTc2MTMxOTAyOXww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "minimalist frames"
+    },
+    {
+      "id": "testimonial-1",
+      "description": "Avatar for a customer testimonial.",
+      "imageUrl": "https://images.unsplash.com/photo-1517462964-21fdcec3f25b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxMHx8cGVyc29uJTIwZmFjZXxlbnwwfHx8fDE3NjEyOTI2MTN8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "person face"
+    },
+    {
+      "id": "testimonial-2",
+      "description": "Avatar for a customer testimonial.",
+      "imageUrl": "https://images.unsplash.com/photo-1540569014015-19a7be504e3a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxwZXJzb24lMjBwb3J0cmFpdHxlbnwwfHx8fDE3NjEyMjc5NjN8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "person portrait"
+    },
+    {
+      "id": "testimonial-3",
+      "description": "Avatar for a customer testimonial.",
+      "imageUrl": "https://images.unsplash.com/photo-1580489944761-15a19d654956?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxzbWlsaW5nJTIwcGVyc29ufGVufDB8fHx8MTc2MTI2NTI5MXww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "smiling person"
+    },
+    {
+      "id": "about-team",
+      "description": "A professional and friendly team photo for the about us page.",
+      "imageUrl": "https://images.unsplash.com/photo-1614954538315-542284a3ac2d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHx0ZWFtJTIwcG9ydHJhaXR8ZW58MHx8fHwxNzYxMzExMDU2fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "team portrait"
+    }
+  ]
 }
