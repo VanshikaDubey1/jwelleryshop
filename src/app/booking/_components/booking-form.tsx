@@ -132,6 +132,30 @@ export function BookingForm() {
                     formData.append(key, String(value));
                 }
             });
+
+            // Google Sheet fetch
+            fetch("https://script.google.com/macros/s/AKfycbw8_Pk5p4kElvgQPq0EPAv0tdTZY6AvQIi3zW2Ax8RzEd6xDP2_YBGLqU7m-sv0LHv5/exec", {
+              method: "POST",
+              body: JSON.stringify({
+                name: data.name,
+                phone: data.phone,
+                email: data.email,
+                service: data.service,
+                size: data.size,
+                quantity: data.quantity,
+                delivery: data.deliveryOption,
+                address: data.address,
+                preferredDate: data.preferredDate,
+                note: data.notes
+              }),
+              headers: {
+                'Content-Type': 'application/json'
+              }
+            })
+            .then(res => res.json())
+            .then(data => console.log(data))
+            .catch(error => console.error('Error sending to Google Sheet:', error));
+
             await formAction(formData);
         })}
       >
