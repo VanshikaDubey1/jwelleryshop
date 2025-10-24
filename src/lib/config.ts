@@ -23,20 +23,20 @@ export const NAV_LINKS = [
 export const SERVICES = [
   {
     title: "Photo Printing",
-    description: "High-quality prints of your favorite moments, available in various sizes and finishes. Perfect for framing or sharing.",
-    priceRange: "Starts at ₹10/photo",
+    description: "High-quality prints of your favorite moments, available in various sizes and finishes.",
+    priceRange: "₹10 – ₹50",
     image: getImage("service-photo-printing")
   },
   {
     title: "Album Printing",
-    description: "Create beautiful, custom-designed photo albums to preserve your precious memories for a lifetime. Ideal for weddings, vacations, and family events.",
-    priceRange: "Starts at ₹2500",
+    description: "Create beautiful, custom-designed photo albums to preserve your precious memories for a lifetime.",
+    priceRange: "₹500 – ₹2000",
     image: getImage("service-album-printing")
   },
   {
     title: "Acrylic Printing",
-    description: "Modern, vibrant, and durable acrylic prints that make your photos pop. A stunning addition to any home or office decor.",
-    priceRange: "Starts at ₹1500",
+    description: "Modern, vibrant, and durable acrylic prints that make your photos pop.",
+    priceRange: "₹800 – ₹3000",
     image: getImage("service-acrylic-printing")
   },
 ];
