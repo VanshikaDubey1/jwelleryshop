@@ -61,7 +61,7 @@ const visualizeInGalleryFlow = ai.defineFlow(
   },
   async input => {
     const {media} = await ai.generate({
-      model: 'googleai/gemini-2.5-flash-image-preview',
+      model: 'googleai/gemini-pro-vision',
       prompt: [
         {media: {url: input.photoDataUri}},
         {text: `Visualize this photo as a ${input.galleryStyle} print.`},
