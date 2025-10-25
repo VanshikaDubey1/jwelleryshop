@@ -74,7 +74,7 @@ If the gallery style is 'wallframe', create an image showing the photo in an ele
         return { visualizedImage: '', error: `AI failed to generate an image. Please try again.` };
       }
 
-      return {visualizedImage: imageUrl};
+      return {visualizedImage: imageUrl, error: undefined};
     } catch (error: any) {
         console.error("AI visualization error:", error);
         if (error.message && (error.message.includes('429') || error.message.includes('Too Many Requests'))) {
