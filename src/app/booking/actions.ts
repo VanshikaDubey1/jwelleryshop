@@ -83,11 +83,16 @@ export async function sendToGoogleSheet(data: Booking) {
     const scriptURL = "https://script.google.com/macros/s/AKfycbw8_Pk5p4kElvgQPq0EPAv0tdTZY6AvQIi3zW2Ax8RzEd6xDP2_YBGLqU7m-sv0LHv5/exec";
     
     const sheetData = {
-        name: data.name,
-        email: data.email || '',
-        phone: data.phone,
-        date: data.preferredDate.toLocaleDateString('en-IN'), // Format date for the sheet
-        message: `Service: ${data.service}\nSize: ${data.size}\nQuantity: ${data.quantity}\nDelivery: ${data.deliveryOption}\nAddress: ${data.address || 'N/A'}\nNotes: ${data.notes || 'N/A'}`,
+        Name: data.name,
+        Phone: data.phone,
+        Email: data.email || '',
+        Service: data.service,
+        Quantity: data.quantity,
+        Size: data.size,
+        Delivery: data.deliveryOption,
+        Address: data.address || '',
+        "Preferred Date": data.preferredDate.toLocaleDateString('en-IN'),
+        Note: data.notes || '',
     };
 
     try {
