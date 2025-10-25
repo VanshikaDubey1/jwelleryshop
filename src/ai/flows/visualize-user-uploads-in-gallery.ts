@@ -60,11 +60,6 @@ Based on the gallery style and size, create a realistic image that shows how the
 If the gallery style is 'album', create an image showing the photo inside an open, high-quality photo album.
 If the gallery style is 'acrylic', create an image showing the photo as a glossy acrylic print of the specified size, perhaps mounted on a modern wall to give a sense of scale.
 If the gallery style is 'wallframe', create an image showing the photo in an elegant wall frame of the specified size, hanging in a well-lit room to give a sense of scale.`,
-          config: {
-            response: {
-                format: 'media'
-            }
-          }
       });
       
       const imageUrl = llmResponse.media?.url;
