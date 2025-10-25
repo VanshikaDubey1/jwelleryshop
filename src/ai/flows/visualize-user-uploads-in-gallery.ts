@@ -62,6 +62,11 @@ If the gallery style is 'acrylic', create an image showing the photo as a glossy
 If the gallery style is 'wallframe', create an image showing the photo in an elegant wall frame of the specified size, hanging in a well-lit room to give a sense of scale.`},
             { media: { url: photoDataUri } }
           ],
+          config: {
+            temperature: 0.7,
+            maxOutputTokens: 256,
+            topP: 0.9,
+          }
       });
       
       const imageUrl = llmResponse.media?.url;
