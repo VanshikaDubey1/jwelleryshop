@@ -11,11 +11,11 @@ export function ServicesHighlight() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <PageHeader
           title="Our Services"
-          subtitle=""
-          description=""
+          subtitle="What We Offer"
+          description="From simple prints to elaborate albums, we provide a range of services to meet your needs."
         />
 
-        <div className="mt-12 grid gap-8 md:grid-cols-3">
+        <div className="mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
           {SERVICES_HOME.map((service) => (
              <Card key={service.title} className="flex flex-col overflow-hidden transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 group bg-card border-border">
                 <div className="relative aspect-w-4 aspect-h-3">
@@ -43,6 +43,11 @@ export function ServicesHighlight() {
                 </CardFooter>
               </Card>
           ))}
+        </div>
+        <div className="mt-12 text-center">
+            <Button asChild>
+                <Link href="/services">View All Services</Link>
+            </Button>
         </div>
       </div>
     </section>

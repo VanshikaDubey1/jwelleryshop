@@ -10,7 +10,7 @@ export function GalleryClient() {
     return (
         <Tabs defaultValue="albums" className="w-full">
             <div className="flex justify-center">
-                <TabsList>
+                <TabsList className="grid w-full grid-cols-3 sm:w-auto sm:inline-flex">
                     {Object.entries(GALLERY_CATEGORIES).map(([key, { title }]) => (
                         <TabsTrigger key={key} value={key}>
                             {title}
@@ -25,7 +25,7 @@ export function GalleryClient() {
 
             {Object.entries(GALLERY_CATEGORIES).map(([key, { images }]) => (
                 <TabsContent key={key} value={key}>
-                    <div className="columns-2 md:columns-3 lg:columns-4 gap-4 space-y-4">
+                    <div className="columns-2 sm:columns-3 lg:columns-4 gap-4 space-y-4">
                         {images.map((image, index) => (
                             <div key={`${image.id}-${index}`} className="break-inside-avoid">
                                 <Image

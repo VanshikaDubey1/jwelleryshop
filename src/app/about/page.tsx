@@ -27,7 +27,7 @@ export default function AboutPage() {
       <section className="pt-0">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-2 gap-8 lg:gap-16 items-center">
-            <div className="space-y-4 text-lg text-muted-foreground">
+            <div className="space-y-4 text-lg text-muted-foreground order-2 md:order-1">
               <p>
                 At Shreeji Photobooks, we believe that every photograph tells a story, and every memory deserves to be cherished. Our journey began with a simple idea: to transform digital images into tangible works of art that can be held, shared, and passed down through generations.
               </p>
@@ -38,7 +38,7 @@ export default function AboutPage() {
                 We're more than just a print shop; we're storytellers, artists, and memory keepers. We are honored to be a part of your special moments.
               </p>
             </div>
-            <div className="aspect-w-3 aspect-h-2 rounded-lg overflow-hidden shadow-lg">
+            <div className="aspect-w-3 aspect-h-2 rounded-lg overflow-hidden shadow-lg order-1 md:order-2">
               {teamImage && (
                 <Image
                   src={teamImage.imageUrl}
