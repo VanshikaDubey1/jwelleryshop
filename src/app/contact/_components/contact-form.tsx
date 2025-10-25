@@ -3,9 +3,8 @@
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { ContactSchema, type ContactInquiry } from '@/lib/types';
-import { useFormState } from 'react-dom';
+import { useActionState, useEffect } from 'react';
 import { submitContactForm } from '../actions';
-import { useEffect } from 'react';
 import { useToast } from '@/hooks/use-toast';
 import {
   Form,
@@ -26,7 +25,7 @@ const initialState = {
 };
 
 export function ContactForm() {
-    const [state, formAction] = useFormState(submitContactForm, initialState);
+    const [state, formAction] = useActionState(submitContactForm, initialState);
     const { toast } = useToast();
 
     const form = useForm<ContactInquiry>({
