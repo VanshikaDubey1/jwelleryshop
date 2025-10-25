@@ -59,7 +59,7 @@ export async function submitBooking(prevState: any, formData: FormData) {
             }
         }
         
-        await addDoc(collection(db, 'bookings'), {
+        const docRef = await addDoc(collection(db, 'bookings'), {
             ...bookingData,
             orderId,
             photoURLs,
@@ -80,29 +80,32 @@ export async function submitBooking(prevState: any, formData: FormData) {
 }
 
 export async function sendToGoogleSheet(data: Booking) {
-    const url = "https://script.google.com/macros/s/AKfycbw8_Pk5p4kElvgQPq0EPAv0tdTZY6AvQIi3zW2Ax8RzEd6xDP2_YBGLqU7m-sv0LHv5/exec";
+    const scriptURL = "https://script.google.com/macros/s/AKfycbw8_Pk5p4kElvgQPq0EPAv0tdTZY6AvQIi3zW2Ax8RzEd6xDP2_YBGLqU7m-sv0LHv5/exec";
+    
+    const sheetData = {
+        name: data.name,
+        email: data.email || '',
+        phone: data.phone,
+        date: data.preferredDate.toLocaleDateString('en-IN'), // Format date for the sheet
+        message: `Service: ${data.service}\nSize: ${data.size}\nQuantity: ${data.quantity}\nDelivery: ${data.deliveryOption}\nAddress: ${data.address || 'N/A'}\nNotes: ${data.notes || 'N/A'}`,
+    };
+
     try {
-        await fetch(url, {
+        const response = await fetch(scriptURL, {
           method: "POST",
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            name: data.name,
-            phone: data.phone,
-            email: data.email,
-            service: data.service,
-            size: data.size,
-            quantity: data.quantity,
-            delivery: data.deliveryOption,
-            address: data.address,
-            preferredDate: data.preferredDate.toLocaleDateString(),
-            note: data.notes
-          }),
+          body: JSON.stringify(sheetData),
+          headers: { "Content-Type": "application/json" },
         });
+
+        if (!response.ok) {
+            // Try to get more info from the response if it fails
+            const errorText = await response.text();
+            throw new Error(`Google Sheet request failed: ${response.statusText} - ${errorText}`);
+        }
+
         return { success: true, error: null };
-    } catch (error) {
+    } catch (error: any) {
         console.error('Error sending to Google Sheet:', error);
-        return { success: false, error: 'Could not send data to Google Sheet.' };
+        return { success: false, error: error.message || 'Could not send data to Google Sheet.' };
     }
 }
