@@ -79,7 +79,11 @@ export function BookingForm() {
 
   useEffect(() => {
     const calculatePrice = () => {
-      if (!service || !size || !variant || !quantity) {
+      // For photo printing, we don't need a variant to show a price estimate
+      const isReadyForPrice = (service === 'Photo Printing' && service && size && quantity) || 
+                              (service !== 'Photo Printing' && service && size && variant && quantity);
+
+      if (!isReadyForPrice) {
         setCalculatedPrice(null);
         return;
       }
@@ -92,15 +96,16 @@ export function BookingForm() {
           price = sizeOption.price * quantity;
         }
       } else if (service === 'Album Printing') {
-        const albumOption = PHOTO_ALBUM_DETAILS.options.albums.find(a => a.type === variant && a.size === size);
-        if (albumOption && typeof albumOption.price === 'number') {
+        const albumOption = PHOTO_ALBUM_DETAILS.options.albums.find(a => a.type === variant);
+        if (albumOption && albumOption.size === size && typeof albumOption.price === 'number') {
           price = albumOption.price * quantity;
-        } else if (albumOption) {
+        } else if (albumOption && albumOption.size === size) {
             price = albumOption.price;
         }
       } else if (service === 'Photo Printing') {
          const sizeOption = PHOTO_PRINTING_DETAILS.options.sizes.find(s => s.dimensions === size);
          if (sizeOption) {
+            // Price range is something like "10-25", we take the first number.
             price = `From ₹${sizeOption.priceRange.split('–')[0]} per print`;
          }
       }
