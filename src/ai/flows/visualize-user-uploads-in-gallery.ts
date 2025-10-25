@@ -35,6 +35,26 @@ export async function visualizeInGallery(input: VisualizeInGalleryInput): Promis
   return visualizeInGalleryFlow(input);
 }
 
+const prompt = ai.definePrompt({
+  name: 'visualizeInGalleryPrompt',
+  input: { schema: VisualizeInGalleryInputSchema },
+  output: { schema: VisualizeInGalleryOutputSchema },
+  prompt: `You are an expert in visualizing images in different gallery styles.
+
+You will take the user's photo and visualize it as if it were displayed in the specified gallery style.
+
+Photo: {{media url=photoDataUri}}
+
+Gallery Style: {{galleryStyle}}
+
+Based on the gallery style, create an image that shows how the user's photo will look. Return the visualized image as a data URI in the 'visualizedImage' field of the JSON output.
+
+If the gallery style is 'album', create an image showing the photo in an open photo album.
+If the gallery style is 'acrylic', create an image showing the photo as a glossy acrylic print, perhaps mounted on a wall.
+If the gallery style is 'wallframe', create an image showing the photo in an elegant wall frame hanging in a well-lit room.`,
+});
+
+
 const visualizeInGalleryFlow = ai.defineFlow(
   {
     name: 'visualizeInGalleryFlow',
@@ -43,40 +63,20 @@ const visualizeInGalleryFlow = ai.defineFlow(
   },
   async input => {
     try {
-      const {media, content} = await ai.generate({
-        model: 'googleai/gemini-2.5-flash-image-preview',
-        prompt: `You are an expert in visualizing images in different gallery styles.
+      const {output} = await prompt(input);
 
-You will take the user's photo and visualize it as if it were displayed in the specified gallery style.
-
-Photo: {{media url=photoDataUri}}
-
-Gallery Style: {{galleryStyle}}
-
-Based on the gallery style, create an image that shows how the user's photo will look. Return the visualized image as a data URI.
-
-If the gallery style is album, create an image showing the photo in an album.
-If the gallery style is acrylic, create an image showing the photo as an acrylic print.
-If the gallery style is wallframe, create an image showing the photo in a wall frame.`,
-        config: {
-          responseModalities: ['TEXT', 'IMAGE'],
-        },
-      });
-      
-      const visualizedImage = media?.url;
-      if (!visualizedImage) {
-        const outputText = content.map(c => c.text).join('');
-        console.error("AI visualization failed. No image returned. Output text:", outputText);
-        return { visualizedImage: '', error: `AI failed to generate an image. Details: ${outputText}` };
+      if (!output?.visualizedImage) {
+        console.error("AI visualization failed. No image returned. Output:", output);
+        return { visualizedImage: '', error: `AI failed to generate an image. Please try again.` };
       }
 
-      return {visualizedImage};
+      return {visualizedImage: output.visualizedImage};
     } catch (error: any) {
         console.error("AI visualization error:", error);
         if (error.message && (error.message.includes('429') || error.message.includes('Too Many Requests'))) {
             return {
                 visualizedImage: '',
-                error: 'Rate limit exceeded. Please check your plan and billing details, or try again later.'
+                error: 'The AI is currently busy. Please wait a moment and try again.'
             };
         }
         if(error.message) {
