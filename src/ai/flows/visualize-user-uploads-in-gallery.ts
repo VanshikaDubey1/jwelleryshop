@@ -1,3 +1,4 @@
+
 'use server';
 
 /**
@@ -46,11 +47,10 @@ const visualizeInGalleryFlow = ai.defineFlow(
     try {
       const llmResponse = await ai.generate({
           model: 'googleai/gemini-1.5-flash-latest',
-          prompt: `You are an expert in visualizing images in different gallery styles.
+          prompt: [
+            { text: `You are an expert in visualizing images in different gallery styles.
 
 You will take the user's photo and visualize it as if it were displayed in the specified gallery style and size.
-
-Photo: {{media url=${photoDataUri}}}
 
 Gallery Style: ${galleryStyle}
 ${size ? `Size: ${size}` : ''}
@@ -59,7 +59,9 @@ Based on the gallery style and size, create a realistic image that shows how the
 
 If the gallery style is 'album', create an image showing the photo inside an open, high-quality photo album.
 If the gallery style is 'acrylic', create an image showing the photo as a glossy acrylic print of the specified size, perhaps mounted on a modern wall to give a sense of scale.
-If the gallery style is 'wallframe', create an image showing the photo in an elegant wall frame of the specified size, hanging in a well-lit room to give a sense of scale.`,
+If the gallery style is 'wallframe', create an image showing the photo in an elegant wall frame of the specified size, hanging in a well-lit room to give a sense of scale.`},
+            { media: { url: photoDataUri } }
+          ],
       });
       
       const imageUrl = llmResponse.media?.url;
