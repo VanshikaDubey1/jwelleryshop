@@ -98,3 +98,4 @@ If the gallery style is 'wallframe', create an image showing the photo in an ele
     }
   }
 );
+
