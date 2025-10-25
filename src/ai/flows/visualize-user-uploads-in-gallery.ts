@@ -35,11 +35,17 @@ export async function visualizeInGallery(input: VisualizeInGalleryInput): Promis
   return visualizeInGalleryFlow(input);
 }
 
-const prompt = ai.definePrompt({
-  name: 'visualizeInGalleryPrompt',
-  input: {schema: VisualizeInGalleryInputSchema},
-  output: {schema: VisualizeInGalleryOutputSchema},
-  prompt: `You are an expert in visualizing images in different gallery styles.
+const visualizeInGalleryFlow = ai.defineFlow(
+  {
+    name: 'visualizeInGalleryFlow',
+    inputSchema: VisualizeInGalleryInputSchema,
+    outputSchema: VisualizeInGalleryOutputSchema,
+  },
+  async input => {
+    try {
+      const {media, content} = await ai.generate({
+        model: 'googleai/gemini-2.5-flash-image-preview',
+        prompt: `You are an expert in visualizing images in different gallery styles.
 
 You will take the user's photo and visualize it as if it were displayed in the specified gallery style.
 
@@ -52,38 +58,31 @@ Based on the gallery style, create an image that shows how the user's photo will
 If the gallery style is album, create an image showing the photo in an album.
 If the gallery style is acrylic, create an image showing the photo as an acrylic print.
 If the gallery style is wallframe, create an image showing the photo in a wall frame.`,
-});
-
-const visualizeInGalleryFlow = ai.defineFlow(
-  {
-    name: 'visualizeInGalleryFlow',
-    inputSchema: VisualizeInGalleryInputSchema,
-    outputSchema: VisualizeInGalleryOutputSchema,
-  },
-  async input => {
-    try {
-      const {media} = await ai.generate({
-        model: 'googleai/gemini-2.5-flash-image-preview',
-        prompt: [
-          {media: {url: input.photoDataUri}},
-          {text: `Visualize this photo as a ${input.galleryStyle} print.`},
-        ],
         config: {
           responseModalities: ['TEXT', 'IMAGE'],
         },
       });
       
-      if (!media?.url) {
-        return { visualizedImage: '', error: 'AI failed to generate an image.' };
+      const visualizedImage = media?.url;
+      if (!visualizedImage) {
+        const outputText = content.map(c => c.text).join('');
+        console.error("AI visualization failed. No image returned. Output text:", outputText);
+        return { visualizedImage: '', error: `AI failed to generate an image. Details: ${outputText}` };
       }
 
-      return {visualizedImage: media.url};
+      return {visualizedImage};
     } catch (error: any) {
         console.error("AI visualization error:", error);
-        if (error.message && error.message.includes('429 Too Many Requests')) {
+        if (error.message && (error.message.includes('429') || error.message.includes('Too Many Requests'))) {
             return {
                 visualizedImage: '',
                 error: 'Rate limit exceeded. Please check your plan and billing details, or try again later.'
+            };
+        }
+        if(error.message) {
+             return {
+                visualizedImage: '',
+                error: `An unexpected error occurred: ${error.message}`
             };
         }
         return {
