@@ -46,7 +46,7 @@ const visualizeInGalleryFlow = ai.defineFlow(
   async ({photoDataUri, galleryStyle, size}) => {
     try {
       const llmResponse = await ai.generate({
-          model: 'gemini-1.5-flash-latest',
+          model: 'googleai/gemini-2.5-flash-image-preview',
           prompt: [
             { text: `You are an expert in visualizing images in different gallery styles.
 
@@ -63,9 +63,7 @@ If the gallery style is 'wallframe', create an image showing the photo in an ele
             { media: { url: photoDataUri } }
           ],
           config: {
-            temperature: 0.7,
-            maxOutputTokens: 256,
-            topP: 0.9,
+            responseModalities: ['TEXT', 'IMAGE'],
           }
       });
       
@@ -98,4 +96,3 @@ If the gallery style is 'wallframe', create an image showing the photo in an ele
     }
   }
 );
-
