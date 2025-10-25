@@ -44,6 +44,7 @@ const visualizeInGalleryFlow = ai.defineFlow(
   async ({photoDataUri, galleryStyle}) => {
     try {
       const llmResponse = await ai.generate({
+          model: 'googleai/gemini-1.5-flash-latest',
           prompt: `You are an expert in visualizing images in different gallery styles.
 
 You will take the user's photo and visualize it as if it were displayed in the specified gallery style.
@@ -63,14 +64,15 @@ If the gallery style is 'wallframe', create an image showing the photo in an ele
             }
           }
       });
-      const media = llmResponse.media();
       
-      if (!media.url) {
-        console.error("AI visualization failed. No image returned. Output:", media);
+      const imageUrl = llmResponse.media?.url;
+      
+      if (!imageUrl) {
+        console.error("AI visualization failed. No image returned. Output:", llmResponse);
         return { visualizedImage: '', error: `AI failed to generate an image. Please try again.` };
       }
 
-      return {visualizedImage: media.url};
+      return {visualizedImage: imageUrl};
     } catch (error: any) {
         console.error("AI visualization error:", error);
         if (error.message && (error.message.includes('429') || error.message.includes('Too Many Requests'))) {
