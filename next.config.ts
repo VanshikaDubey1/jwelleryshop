@@ -39,11 +39,15 @@ const nextConfig: NextConfig = {
         hostname: 'www.dkphoto.ie',
         port: '',
         pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'www.pictorem.com',
+        port: '',
+        pathname: '/**',
       }
     ],
   },
 };
 
 export default nextConfig;
-
-    
