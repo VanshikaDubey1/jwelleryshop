@@ -38,9 +38,9 @@
     },
     {
       "id": "home-luxury-albums",
-      "description": "An open luxury photo album showing travel photos.",
-      "imageUrl": "https://images.unsplash.com/photo-1512319490893-35324b7b770f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHx0cmF2ZWwlMjBhbGJ1bXxlbnwwfHx8fDE3NjEzMTkwMjl8MA&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "luxury album"
+      "description": "An open luxury photo album showing wedding photos.",
+      "imageUrl": "https://www.dkphoto.ie/wp-content/uploads/2020/03/Wedding-Albums-Ireland0009.jpg",
+      "imageHint": "wedding album"
     },
     {
       "id": "home-acrylic-frame",
@@ -50,9 +50,9 @@
     },
     {
       "id": "gallery-album-1",
-      "description": "An open photo album showcasing travel memories.",
-      "imageUrl": "https://images.unsplash.com/photo-1512319490893-35324b7b770f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHx0cmF2ZWwlMjBhbGJ1bXxlbnwwfHx8fDE3NjEzMTkwMjl8MA&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "travel album"
+      "description": "An open wedding album showing wedding memories.",
+      "imageUrl": "https://www.dkphoto.ie/wp-content/uploads/2020/03/Wedding-Albums-Ireland0009.jpg",
+      "imageHint": "wedding album"
     },
     {
       "id": "gallery-album-2",

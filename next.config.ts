@@ -33,9 +33,17 @@ const nextConfig: NextConfig = {
         hostname: 'cdn.photoworkout.com',
         port: '',
         pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'www.dkphoto.ie',
+        port: '',
+        pathname: '/**',
       }
     ],
   },
 };
 
 export default nextConfig;
+
+    
