@@ -22,24 +22,75 @@ export const NAV_LINKS = [
 
 export const SERVICES = [
   {
+    title: "Acrylic Printing",
+    description: "Modern, vibrant, and durable acrylic prints that make your photos pop.",
+    priceRange: "₹499 – ₹1999+",
+    image: getImage("service-acrylic-printing")
+  },
+  {
     title: "Photo Printing",
     description: "High-quality prints of your favorite moments, available in various sizes and finishes.",
-    priceRange: "₹10 – ₹50",
+    priceRange: "₹10 – ₹300+",
     image: getImage("service-photo-printing")
   },
   {
     title: "Album Printing",
     description: "Create beautiful, custom-designed photo albums to preserve your precious memories for a lifetime.",
-    priceRange: "₹500 – ₹2000",
+    priceRange: "₹500 – ₹4000+",
     image: getImage("service-album-printing")
   },
-  {
-    title: "Acrylic Printing",
-    description: "Modern, vibrant, and durable acrylic prints that make your photos pop.",
-    priceRange: "₹800 – ₹3000",
-    image: getImage("service-acrylic-printing")
-  },
 ];
+
+export const ACRYLIC_PRINTING_DETAILS = {
+    name: "Acrylic Photo Printing",
+    options: {
+      sizes: [
+        {"size": "12x9", "price": 499},
+        {"size": "11x11", "price": 699},
+        {"size": "16x12", "price": 999},
+        {"size": "16x16", "price": 1199},
+        {"size": "21x15", "price": 1699},
+        {"size": "35x23", "price": 1999}
+      ],
+      thickness: [
+        {"mm": 3, "priceMultiplier": 1},
+        {"mm": 8, "priceMultiplier": 2}
+      ],
+      frameColors: ["Black", "Brown", "White"]
+    },
+    description: "High-quality acrylic prints with frame color options. Price doubles for 8mm thickness."
+};
+
+export const PHOTO_PRINTING_DETAILS = {
+    name: "Photo Printing",
+    options: {
+      sizes: [
+        {"label": "4R", "dimensions": "4x6 in", "priceRange": "10–25", "notes": "Standard photo print"},
+        {"label": "5R", "dimensions": "5x7 in", "priceRange": "20–50", "notes": "Slightly larger than 4R"},
+        {"label": "6R", "dimensions": "6x8 in", "priceRange": "30–80", "notes": "Enlarged photo print"},
+        {"label": "A4", "dimensions": "8.3x11.7 in", "priceRange": "50–200", "notes": "Suitable for documents"},
+        {"label": "A3", "dimensions": "11.7x16.5 in", "priceRange": "100–300", "notes": "Larger posters"},
+        {"label": "Poster", "dimensions": ">A3", "priceRange": "200+", "notes": "Custom sizes available"}
+      ]
+    },
+    description: "Standard and custom photo printing in multiple sizes with estimated pricing."
+};
+
+export const PHOTO_ALBUM_DETAILS = {
+    name: "Photo Album",
+    options: {
+      albums: [
+        {"type": "Mini Album", "size": "6x6 in", "price": 500},
+        {"type": "Small Album", "size": "8x8 in", "price": 800},
+        {"type": "Medium Album", "size": "11x8.5 in", "price": 1500},
+        {"type": "Large Album", "size": "12x12 in", "price": 2500},
+        {"type": "XL Album", "size": "15x12 in", "price": 4000},
+        {"type": "Custom Album", "size": "Varies", "price": "As per request"}
+      ]
+    },
+    description: "Customizable photo albums in multiple sizes with pricing. Samples available."
+};
+
 
 export const SERVICES_HOME = [
   {

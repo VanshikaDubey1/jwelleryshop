@@ -1,17 +1,27 @@
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { PageHeader } from "@/components/shared/page-header";
-import { SERVICES } from "@/lib/config";
-import Image from "next/image";
-import Link from "next/link";
-import type { Metadata } from 'next';
+import {
+  ACRYLIC_PRINTING_DETAILS,
+  PHOTO_ALBUM_DETAILS,
+  PHOTO_PRINTING_DETAILS,
+  SERVICES,
+} from "@/lib/config";
+import type { Metadata } from "next";
+import { ServiceCard } from "./_components/service-card";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { Badge } from "@/components/ui/badge";
 
 export const metadata: Metadata = {
-  title: 'Our Services',
-  description: 'Explore our services: high-quality photo printing, custom album printing, and stunning acrylic prints. Find the perfect way to preserve your memories.',
+  title: "Our Services",
+  description:
+    "Explore our services: high-quality photo printing, custom album printing, and stunning acrylic prints. Find the perfect way to preserve your memories.",
 };
 
 export default function ServicesPage() {
+  const acrylicService = SERVICES.find(s => s.title === "Acrylic Printing");
+  const photoService = SERVICES.find(s => s.title === "Photo Printing");
+  const albumService = SERVICES.find(s => s.title === "Album Printing");
+
+
   return (
     <div className="fade-in bg-background">
       <section>
@@ -22,36 +32,102 @@ export default function ServicesPage() {
             description="We offer a curated selection of printing services, each executed with the highest standards of quality and attention to detail. Find the perfect fit for your memories."
           />
 
-          <div className="mt-20 grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {SERVICES.map((service) => (
-              <Card key={service.title} className="flex flex-col overflow-hidden transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 group bg-card border-border">
-                <div className="relative aspect-w-4 aspect-h-3">
-                  <Image
-                    src={service.image.imageUrl}
-                    alt={service.image.description}
-                    fill
-                    className="object-cover"
-                    data-ai-hint={service.image.imageHint}
-                  />
-                   <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-80 group-hover:opacity-100 transition-opacity"></div>
-                </div>
-                <CardHeader>
-                  <CardTitle className="font-headline relative">
-                    {service.title}
-                     <span className="absolute bottom-0 left-0 h-0.5 bg-primary w-16 transition-all duration-300 group-hover:w-24"></span>
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="flex-grow">
-                  <p className="text-muted-foreground">{service.description}</p>
-                </CardContent>
-                <CardFooter className="flex justify-between items-center p-4">
-                  <p className="font-semibold text-foreground text-lg">{service.priceRange}</p>
-                  <Button asChild className="bg-primary text-primary-foreground hover:bg-foreground hover:text-background">
-                    <Link href="/booking">Book Now</Link>
-                  </Button>
-                </CardFooter>
-              </Card>
-            ))}
+          <div className="mt-20 grid lg:grid-cols-1 gap-12">
+            {/* Acrylic Printing */}
+            {acrylicService && (
+                <ServiceCard 
+                    title={acrylicService.title}
+                    description={ACRYLIC_PRINTING_DETAILS.description}
+                    image={acrylicService.image}
+                >
+                    <Table>
+                        <TableHeader>
+                            <TableRow>
+                                <TableHead>Size</TableHead>
+                                <TableHead className="text-right">Price (3mm)</TableHead>
+                            </TableRow>
+                        </TableHeader>
+                        <TableBody>
+                            {ACRYLIC_PRINTING_DETAILS.options.sizes.map(s => (
+                                <TableRow key={s.size}>
+                                    <TableCell>{s.size}</TableCell>
+                                    <TableCell className="text-right">₹{s.price}</TableCell>
+                                </TableRow>
+                            ))}
+                        </TableBody>
+                    </Table>
+                     <div className="text-sm text-muted-foreground mt-4 space-y-2">
+                        <p><strong>Thickness Option:</strong> Price doubles for 8mm thickness.</p>
+                        <p className="flex items-center gap-2"><strong>Frame Colors:</strong> 
+                            {ACRYLIC_PRINTING_DETAILS.options.frameColors.map(color => (
+                                <Badge key={color} variant="secondary">{color}</Badge>
+                            ))}
+                        </p>
+                    </div>
+                </ServiceCard>
+            )}
+
+            {/* Photo Printing */}
+            {photoService && (
+                <ServiceCard 
+                    title={photoService.title}
+                    description={PHOTO_PRINTING_DETAILS.description}
+                    image={photoService.image}
+                >
+                    <Table>
+                        <TableHeader>
+                            <TableRow>
+                                <TableHead>Label</TableHead>
+                                <TableHead>Dimensions</TableHead>
+                                <TableHead>Notes</TableHead>
+                                <TableHead className="text-right">Price Range</TableHead>
+                            </TableRow>
+                        </TableHeader>
+                        <TableBody>
+                            {PHOTO_PRINTING_DETAILS.options.sizes.map(s => (
+                                <TableRow key={s.label}>
+                                    <TableCell className="font-medium">{s.label}</TableCell>
+                                    <TableCell>{s.dimensions}</TableCell>
+                                    <TableCell className="text-muted-foreground">{s.notes}</TableCell>
+                                    <TableCell className="text-right">₹{s.priceRange}</TableCell>
+                                </TableRow>
+                            ))}
+                        </TableBody>
+                    </Table>
+                </ServiceCard>
+            )}
+            
+            {/* Album Printing */}
+            {albumService && (
+                <ServiceCard 
+                    title={albumService.title}
+                    description={PHOTO_ALBUM_DETAILS.description}
+                    image={albumService.image}
+                >
+                    <Table>
+                        <TableHeader>
+                            <TableRow>
+                                <TableHead>Album Type</TableHead>
+                                <TableHead>Size</TableHead>
+                                <TableHead className="text-right">Starting Price</TableHead>
+                            </TableRow>
+                        </TableHeader>
+                        <TableBody>
+                            {PHOTO_ALBUM_DETAILS.options.albums.map(a => (
+                                <TableRow key={a.type}>
+                                    <TableCell className="font-medium">{a.type}</TableCell>
+                                    <TableCell>{a.size}</TableCell>
+                                    <TableCell className="text-right">{typeof a.price === 'number' ? `₹${a.price}` : a.price}</TableCell>
+                                </TableRow>
+                            ))}
+                        </TableBody>
+                    </Table>
+                    <div className="text-sm text-muted-foreground mt-4">
+                        <p>Samples available in-store. Visit us to see the quality and finish.</p>
+                    </div>
+                </ServiceCard>
+            )}
+
           </div>
         </div>
       </section>
