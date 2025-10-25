@@ -7,6 +7,7 @@ export const BookingSchema = z.object({
   service: z.enum(["Photo Printing", "Album Printing", "Acrylic Printing"]),
   size: z.string().min(1, { message: "Size is required." }),
   variant: z.string().min(1, { message: "Variant is required." }),
+  frameColor: z.string().optional(),
   quantity: z.coerce.number().min(1, { message: "Quantity must be at least 1." }),
   deliveryOption: z.enum(["Delivery", "Pickup"]),
   address: z.string().optional(),
@@ -21,6 +22,14 @@ export const BookingSchema = z.object({
 }, {
   message: "Address is required for delivery.",
   path: ["address"],
+}).refine(data => {
+    if (data.service === 'Acrylic Printing') {
+        return !!data.frameColor && data.frameColor.length > 0;
+    }
+    return true;
+}, {
+    message: "Frame color is required for Acrylic Printing.",
+    path: ["frameColor"],
 });
 
 export type Booking = z.infer<typeof BookingSchema>;

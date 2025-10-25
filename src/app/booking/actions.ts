@@ -81,6 +81,7 @@ export async function sendToGoogleSheet(data: Booking) {
         Service: data.service,
         Size: data.size,
         Variant: data.variant,
+        "Frame Color": data.frameColor || '',
         Quantity: data.quantity,
         Delivery: data.deliveryOption,
         Address: data.address || '',

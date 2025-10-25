@@ -1,10 +1,10 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect }from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { BookingSchema, type Booking } from '@/lib/types';
-import { SERVICES } from '@/lib/config';
+import { SERVICES, ACRYLIC_PRINTING_DETAILS, PHOTO_ALBUM_DETAILS, PHOTO_PRINTING_DETAILS } from '@/lib/config';
 import { submitBooking, sendToGoogleSheet } from '../actions';
 import { useToast } from '@/hooks/use-toast';
 import emailjs from '@emailjs/browser';
@@ -35,7 +35,7 @@ import { Calendar } from '@/components/ui/calendar';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { cn } from '@/lib/utils';
-import { CalendarIcon, Loader2, Send, UploadCloud } from 'lucide-react';
+import { CalendarIcon, Loader2, Send, UploadCloud, IndianRupee } from 'lucide-react';
 import { format } from 'date-fns';
 import {
   Card,
@@ -44,11 +44,13 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 
 export function BookingForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
   const [filePreview, setFilePreview] = useState<string[]>([]);
+  const [calculatedPrice, setCalculatedPrice] = useState<string | null>(null);
 
   const form = useForm<Booking>({
     resolver: zodResolver(BookingSchema),
@@ -59,6 +61,7 @@ export function BookingForm() {
       service: 'Photo Printing',
       size: '',
       variant: '',
+      frameColor: '',
       quantity: 1,
       deliveryOption: 'Pickup',
       address: '',
@@ -70,6 +73,49 @@ export function BookingForm() {
 
   const deliveryOption = form.watch('deliveryOption');
   const service = form.watch('service');
+  const size = form.watch('size');
+  const variant = form.watch('variant');
+  const quantity = form.watch('quantity');
+
+  useEffect(() => {
+    const calculatePrice = () => {
+      if (!service || !size || !variant || !quantity) {
+        setCalculatedPrice(null);
+        return;
+      }
+  
+      let price: number | string | null = null;
+  
+      if (service === 'Acrylic Printing') {
+        const sizeOption = ACRYLIC_PRINTING_DETAILS.options.sizes.find(s => s.size === size);
+        if (sizeOption) {
+          price = sizeOption.price * quantity;
+        }
+      } else if (service === 'Album Printing') {
+        const albumOption = PHOTO_ALBUM_DETAILS.options.albums.find(a => a.type === variant && a.size === size);
+        if (albumOption && typeof albumOption.price === 'number') {
+          price = albumOption.price * quantity;
+        } else if (albumOption) {
+            price = albumOption.price;
+        }
+      } else if (service === 'Photo Printing') {
+         const sizeOption = PHOTO_PRINTING_DETAILS.options.sizes.find(s => s.dimensions === size);
+         if (sizeOption) {
+            price = `From ₹${sizeOption.priceRange.split('–')[0]} per print`;
+         }
+      }
+  
+      if (typeof price === 'number') {
+        setCalculatedPrice(`₹${price.toFixed(2)}`);
+      } else if (typeof price === 'string') {
+        setCalculatedPrice(price);
+      } else {
+        setCalculatedPrice("Price not available for this selection.");
+      }
+    };
+  
+    calculatePrice();
+  }, [service, size, variant, quantity]);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
@@ -148,16 +194,16 @@ export function BookingForm() {
     setIsSubmitting(false);
   };
 
-  const sizeOptions: Record<string, string[]> = {
-    'Photo Printing': ['4x6', '5x7', '6x8', '8x10', '10x12', '12x15'],
-    'Album Printing': ['12x36', '13x40', '14x40', '15x40', '20x30'],
-    'Acrylic Printing': ['8x12', '12x16', '16x20', '20x30'],
+  const sizeOptions: Record<string, {value: string; label: string}[]> = {
+    'Photo Printing': PHOTO_PRINTING_DETAILS.options.sizes.map(s => ({ value: s.dimensions, label: `${s.label} (${s.dimensions} in)` })),
+    'Album Printing': PHOTO_ALBUM_DETAILS.options.albums.map(a => ({ value: a.size, label: `${a.size} in` })).filter((v, i, a) => a.findIndex(t => (t.value === v.value)) === i),
+    'Acrylic Printing': ACRYLIC_PRINTING_DETAILS.options.sizes.map(s => ({ value: s.size, label: `${s.size} in` })),
   };
 
   const variantOptions: Record<string, string[]> = {
     'Photo Printing': ['Glossy', 'Matte'],
-    'Album Printing': ['Standard Layflat', 'HD Layflat', 'Flush Mount'],
-    'Acrylic Printing': ['Transparent', 'Frosted', '3D Crystal'],
+    'Album Printing': PHOTO_ALBUM_DETAILS.options.albums.map(a => a.type),
+    'Acrylic Printing': ['3mm Thickness', '8mm Thickness'],
   }
 
   return (
@@ -228,6 +274,7 @@ export function BookingForm() {
                           field.onChange(value);
                           form.setValue('size', '');
                           form.setValue('variant', '');
+                          form.setValue('frameColor', '');
                         }}
                         defaultValue={field.value}
                       >
@@ -264,7 +311,7 @@ export function BookingForm() {
                             </FormControl>
                             <SelectContent>
                                 {(sizeOptions[service] || []).map(option => (
-                                    <SelectItem key={option} value={option}>{option}</SelectItem>
+                                    <SelectItem key={option.value} value={option.value}>{option.label}</SelectItem>
                                 ))}
                             </SelectContent>
                         </Select>
@@ -295,6 +342,32 @@ export function BookingForm() {
                     )}
                   />
                 </div>
+                 {service === 'Acrylic Printing' && (
+                  <div className="fade-in">
+                    <FormField
+                      control={form.control}
+                      name="frameColor"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Frame Color *</FormLabel>
+                          <Select onValueChange={field.onChange} value={field.value}>
+                              <FormControl>
+                                  <SelectTrigger>
+                                      <SelectValue placeholder="Select a frame color" />
+                                  </SelectTrigger>
+                              </FormControl>
+                              <SelectContent>
+                                  {ACRYLIC_PRINTING_DETAILS.options.frameColors.map(color => (
+                                      <SelectItem key={color} value={color}>{color}</SelectItem>
+                                  ))}
+                              </SelectContent>
+                          </Select>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+                 )}
                  <FormField
                     control={form.control}
                     name="quantity"
@@ -302,7 +375,7 @@ export function BookingForm() {
                       <FormItem>
                         <FormLabel>Quantity *</FormLabel>
                         <FormControl>
-                          <Input type="number" min="1" {...field} />
+                          <Input type="number" min="1" {...field} onChange={e => field.onChange(parseInt(e.target.value, 10) || 1)} />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -346,6 +419,15 @@ export function BookingForm() {
 
               {/* Column 2 */}
               <div className="space-y-8">
+                <div className="sticky top-24">
+                  <Alert>
+                    <IndianRupee className="h-4 w-4" />
+                    <AlertTitle>Estimated Price</AlertTitle>
+                    <AlertDescription className="text-lg font-bold text-foreground">
+                      {calculatedPrice || "Select options to see price"}
+                    </AlertDescription>
+                  </Alert>
+                </div>
                 <FormField
                   control={form.control}
                   name="deliveryOption"
