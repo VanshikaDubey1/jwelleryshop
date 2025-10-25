@@ -8,15 +8,7 @@ import { addDoc, collection, serverTimestamp } from 'firebase/firestore';
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 
 // Ensure Firebase is initialized with server-side config
-initializeFirebase({
-    apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
-    authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
-    projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
-    storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
-    messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
-    appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
-    measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID
-});
+initializeFirebase();
 
 function generateOrderId() {
     const prefix = 'SHP';
@@ -87,8 +79,9 @@ export async function sendToGoogleSheet(data: Booking) {
         Phone: data.phone,
         Email: data.email || '',
         Service: data.service,
-        Quantity: data.quantity,
         Size: data.size,
+        Variant: data.variant,
+        Quantity: data.quantity,
         Delivery: data.deliveryOption,
         Address: data.address || '',
         "Preferred Date": data.preferredDate.toLocaleDateString('en-IN'),

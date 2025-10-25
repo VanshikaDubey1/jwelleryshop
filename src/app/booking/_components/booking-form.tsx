@@ -58,6 +58,7 @@ export function BookingForm() {
       email: '',
       service: 'Photo Printing',
       size: '',
+      variant: '',
       quantity: 1,
       deliveryOption: 'Pickup',
       address: '',
@@ -68,6 +69,7 @@ export function BookingForm() {
   });
 
   const deliveryOption = form.watch('deliveryOption');
+  const service = form.watch('service');
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
@@ -101,9 +103,8 @@ export function BookingForm() {
         title: 'Booking Confirmed!',
         description: `Your Order ID is ${result.orderId}. We will get in touch with you shortly.`,
       });
-
-      // Send to Google Sheet
-      const sheetResult = await sendToGoogleSheet(data);
+      
+      const sheetResult = await sendToGoogleSheet(result.bookingData as Booking);
       if(sheetResult.success) {
         console.log("Successfully sent to Google Sheet");
       } else {
@@ -115,7 +116,6 @@ export function BookingForm() {
         });
       }
 
-      // Send email notification
       const emailjsServiceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID;
       const emailjsTemplateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID;
       const emailjsPublicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY;
@@ -147,6 +147,18 @@ export function BookingForm() {
     }
     setIsSubmitting(false);
   };
+
+  const sizeOptions: Record<string, string[]> = {
+    'Photo Printing': ['4x6', '5x7', '6x8', '8x10', '10x12', '12x15'],
+    'Album Printing': ['12x36', '13x40', '14x40', '15x40', '20x30'],
+    'Acrylic Printing': ['8x12', '12x16', '16x20', '20x30'],
+  };
+
+  const variantOptions: Record<string, string[]> = {
+    'Photo Printing': ['Glossy', 'Matte'],
+    'Album Printing': ['Standard Layflat', 'HD Layflat', 'Flush Mount'],
+    'Acrylic Printing': ['Transparent', 'Frosted', '3D Crystal'],
+  }
 
   return (
     <Card className="border-2 border-primary/10 shadow-lg">
@@ -212,7 +224,11 @@ export function BookingForm() {
                     <FormItem>
                       <FormLabel>Service *</FormLabel>
                       <Select
-                        onValueChange={field.onChange}
+                        onValueChange={(value) => {
+                          field.onChange(value);
+                          form.setValue('size', '');
+                          form.setValue('variant', '');
+                        }}
                         defaultValue={field.value}
                       >
                         <FormControl>
@@ -234,20 +250,52 @@ export function BookingForm() {
                 />
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <FormField
+                   <FormField
                     control={form.control}
                     name="size"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Size / Variant *</FormLabel>
-                        <FormControl>
-                          <Input placeholder="e.g., 8x10, 12-inch" {...field} />
-                        </FormControl>
+                        <FormLabel>Size *</FormLabel>
+                        <Select onValueChange={field.onChange} value={field.value}>
+                            <FormControl>
+                                <SelectTrigger>
+                                    <SelectValue placeholder="Select a size" />
+                                </SelectTrigger>
+                            </FormControl>
+                            <SelectContent>
+                                {(sizeOptions[service] || []).map(option => (
+                                    <SelectItem key={option} value={option}>{option}</SelectItem>
+                                ))}
+                            </SelectContent>
+                        </Select>
                         <FormMessage />
                       </FormItem>
                     )}
                   />
-                  <FormField
+                   <FormField
+                    control={form.control}
+                    name="variant"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Variant *</FormLabel>
+                        <Select onValueChange={field.onChange} value={field.value}>
+                            <FormControl>
+                                <SelectTrigger>
+                                    <SelectValue placeholder="Select a variant" />
+                                </SelectTrigger>
+                            </FormControl>
+                            <SelectContent>
+                                {(variantOptions[service] || []).map(option => (
+                                    <SelectItem key={option} value={option}>{option}</SelectItem>
+                                ))}
+                            </SelectContent>
+                        </Select>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
+                 <FormField
                     control={form.control}
                     name="quantity"
                     render={({ field }) => (
@@ -260,7 +308,6 @@ export function BookingForm() {
                       </FormItem>
                     )}
                   />
-                </div>
                 
                 <FormField
                   control={form.control}
@@ -384,7 +431,7 @@ export function BookingForm() {
                             mode="single"
                             selected={field.value}
                             onSelect={field.onChange}
-                            disabled={(date) => date < new Date() || date < new Date("1900-01-01")}
+                            disabled={(date) => date < new Date(new Date().setDate(new Date().getDate() -1))}
                             initialFocus
                           />
                         </PopoverContent>
