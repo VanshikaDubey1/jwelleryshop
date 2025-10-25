@@ -41,6 +41,28 @@ export const SERVICES = [
   },
 ];
 
+export const SERVICES_HOME = [
+  {
+    title: "HD Photo Printing",
+    specs: "Glossy / Matte\nStandard Sizes",
+    priceRange: "Price: ₹10 Onwards",
+    image: getImage("home-hd-printing")
+  },
+  {
+    title: "Luxury Albums",
+    specs: "Wedding, Baby, Travel\nCustom Designs",
+    priceRange: "Price: ₹500 Onwards",
+    image: getImage("home-luxury-albums")
+  },
+  {
+    title: "Acrylic Frame Printing",
+    specs: "Custom Sizes\nReady-to-Hang",
+    priceRange: "Price: ₹800 Onwards",
+    image: getImage("home-acrylic-frame")
+  },
+];
+
+
 export const GALLERY_CATEGORIES = {
   albums: {
     title: 'Albums',

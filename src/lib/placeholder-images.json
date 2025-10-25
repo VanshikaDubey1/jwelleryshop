@@ -7,6 +7,12 @@
       "imageHint": "wedding album"
     },
     {
+      "id": "hero-2",
+      "description": "A photobook and glowing acrylic frames against a dark background.",
+      "imageUrl": "https://images.unsplash.com/photo-1632679760635-55966a6e3d42?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxwaG90byUyMGFsYnVtfGVufDB8fHx8MTc2MTMxOTAyOXww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "photobook acrylic"
+    },
+    {
       "id": "service-photo-printing",
       "description": "A collection of high-quality photo prints scattered on a surface.",
       "imageUrl": "https://images.unsplash.com/photo-1684741892637-c79b2e635921?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxwaG90byUyMHByaW50c3xlbnwwfHx8fDE3NjEzMTkwMjl8MA&ixlib=rb-4.1.0&q=80&w=1080",
@@ -23,6 +29,24 @@
       "description": "A vibrant acrylic print of a landscape hanging on a modern wall.",
       "imageUrl": "https://images.unsplash.com/photo-1655514484562-6d5aa13a3fd7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxhY3J5bGljJTIwcHJpbnR8ZW58MHx8fHwxNzYxMzE5MDI5fDA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "acrylic print"
+    },
+    {
+      "id": "home-hd-printing",
+      "description": "A set of glossy photo prints, one showing a person in traditional attire.",
+      "imageUrl": "https://images.unsplash.com/photo-151746296421fdcec3f25b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxwZXJzb24lMjBwb3J0cmFpdCUyMHByaW50fGVufDB8fHx8MTc2MTM5MjM0NXww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "photo print"
+    },
+    {
+      "id": "home-luxury-albums",
+      "description": "An open luxury photo album showing travel photos.",
+      "imageUrl": "https://images.unsplash.com/photo-1512319490893-35324b7b770f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHx0cmF2ZWwlMjBhbGJ1bXxlbnwwfHx8fDE3NjEzMTkwMjl8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "luxury album"
+    },
+    {
+      "id": "home-acrylic-frame",
+      "description": "A square acrylic frame with a bright light illuminating it from behind.",
+      "imageUrl": "https://images.unsplash.com/photo-1655514484562-6d5aa13a3fd7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxhY3J5bGljJTIwZnJhbWV8ZW58MHx8fHwxNzYxMzkxODc3fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "acrylic frame"
     },
     {
       "id": "gallery-album-1",
