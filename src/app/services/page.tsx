@@ -58,11 +58,11 @@ export default function ServicesPage() {
                     </Table>
                      <div className="text-sm text-muted-foreground mt-4 space-y-2">
                         <p><strong>Thickness Option:</strong> Price doubles for 8mm thickness.</p>
-                        <p className="flex items-center gap-2"><strong>Frame Colors:</strong> 
+                        <div className="flex items-center gap-2"><strong>Frame Colors:</strong> 
                             {ACRYLIC_PRINTING_DETAILS.options.frameColors.map(color => (
                                 <Badge key={color} variant="secondary">{color}</Badge>
                             ))}
-                        </p>
+                        </div>
                     </div>
                 </ServiceCard>
             )}
