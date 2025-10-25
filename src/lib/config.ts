@@ -76,6 +76,15 @@ export const PHOTO_PRINTING_DETAILS = {
     description: "Standard and custom photo printing in multiple sizes with estimated pricing."
 };
 
+export const WALL_FRAME_DETAILS = {
+    name: "Wall Frames",
+    options: {
+        sizes: PHOTO_PRINTING_DETAILS.options.sizes.filter(s => s.label !== 'Poster')
+    },
+    description: "Elegant wall frames for your photos."
+};
+
+
 export const PHOTO_ALBUM_DETAILS = {
     name: "Photo Album",
     options: {

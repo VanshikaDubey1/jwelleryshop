@@ -31,12 +31,14 @@ import { useToast } from "@/hooks/use-toast";
 import { visualizeInGallery } from "@/ai/flows/visualize-user-uploads-in-gallery";
 import { Loader2, UploadCloud, Wand2 } from "lucide-react";
 import Image from "next/image";
+import { ACRYLIC_PRINTING_DETAILS, WALL_FRAME_DETAILS } from "@/lib/config";
 
 const formSchema = z.object({
   photo: z.any().refine((files) => files?.length == 1, "Photo is required."),
   style: z.enum(["album", "acrylic", "wallframe"], {
     required_error: "Please select a style.",
   }),
+  size: z.string().optional(),
 });
 
 type FormValues = z.infer<typeof formSchema>;
@@ -52,6 +54,19 @@ export function VisualizeInGallery() {
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
   });
+
+  const selectedStyle = form.watch("style");
+
+  const sizeOptions: Record<string, { value: string; label: string }[]> = {
+    acrylic: ACRYLIC_PRINTING_DETAILS.options.sizes.map((s) => ({
+      value: `${s.size} in`,
+      label: `${s.size} inches`,
+    })),
+    wallframe: WALL_FRAME_DETAILS.options.sizes.map((s) => ({
+      value: `${s.dimensions} in`,
+      label: `${s.label} (${s.dimensions} in)`,
+    })),
+  };
 
   const onSubmit: SubmitHandler<FormValues> = async (data) => {
     setIsLoading(true);
@@ -69,6 +84,7 @@ export function VisualizeInGallery() {
           const result = await visualizeInGallery({
             photoDataUri: base64,
             galleryStyle: data.style,
+            size: data.size,
           });
 
           if (result.error) {
@@ -170,31 +186,64 @@ export function VisualizeInGallery() {
                 )}
               />
 
-              <FormField
-                control={form.control}
-                name="style"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>2. Choose a Style</FormLabel>
-                    <Select
-                      onValueChange={field.onChange}
-                      defaultValue={field.value}
-                    >
-                      <FormControl>
-                        <SelectTrigger>
-                          <SelectValue placeholder="Select a gallery style" />
-                        </SelectTrigger>
-                      </FormControl>
-                      <SelectContent>
-                        <SelectItem value="album">Photo Album</SelectItem>
-                        <SelectItem value="acrylic">Acrylic Print</SelectItem>
-                        <SelectItem value="wallframe">Wall Frame</SelectItem>
-                      </SelectContent>
-                    </Select>
-                    <FormMessage />
-                  </FormItem>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <FormField
+                  control={form.control}
+                  name="style"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>2. Choose a Style</FormLabel>
+                      <Select
+                        onValueChange={(value) => {
+                          field.onChange(value);
+                          form.setValue("size", undefined);
+                        }}
+                        defaultValue={field.value}
+                      >
+                        <FormControl>
+                          <SelectTrigger>
+                            <SelectValue placeholder="Select a gallery style" />
+                          </SelectTrigger>
+                        </FormControl>
+                        <SelectContent>
+                          <SelectItem value="album">Photo Album</SelectItem>
+                          <SelectItem value="acrylic">Acrylic Print</SelectItem>
+                          <SelectItem value="wallframe">Wall Frame</SelectItem>
+                        </SelectContent>
+                      </Select>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                
+                {selectedStyle && selectedStyle !== 'album' && (
+                  <FormField
+                    control={form.control}
+                    name="size"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>3. Choose a Size</FormLabel>
+                         <Select
+                          onValueChange={field.onChange}
+                          value={field.value}
+                        >
+                          <FormControl>
+                            <SelectTrigger>
+                              <SelectValue placeholder="Select a size" />
+                            </SelectTrigger>
+                          </FormControl>
+                           <SelectContent>
+                            {(sizeOptions[selectedStyle] || []).map(option => (
+                                <SelectItem key={option.value} value={option.value}>{option.label}</SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
                 )}
-              />
+              </div>
 
               <Button type="submit" disabled={isLoading} className="w-full">
                 {isLoading ? (
