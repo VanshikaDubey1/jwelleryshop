@@ -1,5 +1,6 @@
 'use server';
 
+import 'dotenv/config';
 import { db } from '@/lib/firebase';
 import { ContactSchema } from '@/lib/types';
 import { addDoc, collection, serverTimestamp } from 'firebase/firestore';

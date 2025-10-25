@@ -1,5 +1,6 @@
 'use server';
 
+import 'dotenv/config';
 import { z } from 'zod';
 import { db, storage } from '@/lib/firebase';
 import { BookingSchema, type Booking } from '@/lib/types';

@@ -1,5 +1,6 @@
 'use server';
 
+import 'dotenv/config';
 import { db } from '@/lib/firebase';
 import type { BookingDocument } from '@/lib/types';
 import { collection, getDocs, query, where, limit } from 'firebase/firestore';
