@@ -46,7 +46,7 @@ const visualizeInGalleryFlow = ai.defineFlow(
   async ({photoDataUri, galleryStyle, size}) => {
     try {
       const llmResponse = await ai.generate({
-          model: 'googleai/gemini-1.5-flash-latest',
+          model: 'gemini-1.5-flash-latest',
           prompt: [
             { text: `You are an expert in visualizing images in different gallery styles.
 
