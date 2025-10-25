@@ -23,7 +23,7 @@ function initializeFirebase(config?: FirebaseOptions) {
 const app = initializeFirebase();
 const db = getFirestore(app);
 const storage = getStorage(app);
-const auth = getAuth(app);
+const auth = typeof window !== "undefined" ? getAuth(app) : null;
 
 
 export { app, db, storage, auth, initializeFirebase };
