@@ -35,42 +35,42 @@ export async function visualizeInGallery(input: VisualizeInGalleryInput): Promis
   return visualizeInGalleryFlow(input);
 }
 
-const prompt = ai.definePrompt({
-  name: 'visualizeInGalleryPrompt',
-  input: { schema: VisualizeInGalleryInputSchema },
-  output: { schema: VisualizeInGalleryOutputSchema },
-  prompt: `You are an expert in visualizing images in different gallery styles.
-
-You will take the user's photo and visualize it as if it were displayed in the specified gallery style.
-
-Photo: {{media url=photoDataUri}}
-
-Gallery Style: {{galleryStyle}}
-
-Based on the gallery style, create an image that shows how the user's photo will look. Return the visualized image as a data URI in the 'visualizedImage' field of the JSON output.
-
-If the gallery style is 'album', create an image showing the photo in an open photo album.
-If the gallery style is 'acrylic', create an image showing the photo as a glossy acrylic print, perhaps mounted on a wall.
-If the gallery style is 'wallframe', create an image showing the photo in an elegant wall frame hanging in a well-lit room.`,
-});
-
-
 const visualizeInGalleryFlow = ai.defineFlow(
   {
     name: 'visualizeInGalleryFlow',
     inputSchema: VisualizeInGalleryInputSchema,
     outputSchema: VisualizeInGalleryOutputSchema,
   },
-  async input => {
+  async ({photoDataUri, galleryStyle}) => {
     try {
-      const {output} = await prompt(input);
+      const llmResponse = await ai.generate({
+          prompt: `You are an expert in visualizing images in different gallery styles.
 
-      if (!output?.visualizedImage) {
-        console.error("AI visualization failed. No image returned. Output:", output);
+You will take the user's photo and visualize it as if it were displayed in the specified gallery style.
+
+Photo: {{media url=${photoDataUri}}}
+
+Gallery Style: ${galleryStyle}
+
+Based on the gallery style, create an image that shows how the user's photo will look. Return only the image.
+
+If the gallery style is 'album', create an image showing the photo in an open photo album.
+If the gallery style is 'acrylic', create an image showing the photo as a glossy acrylic print, perhaps mounted on a wall.
+If the gallery style is 'wallframe', create an image showing the photo in an elegant wall frame hanging in a well-lit room.`,
+          config: {
+            response: {
+                format: 'media'
+            }
+          }
+      });
+      const media = llmResponse.media();
+      
+      if (!media.url) {
+        console.error("AI visualization failed. No image returned. Output:", media);
         return { visualizedImage: '', error: `AI failed to generate an image. Please try again.` };
       }
 
-      return {visualizedImage: output.visualizedImage};
+      return {visualizedImage: media.url};
     } catch (error: any) {
         console.error("AI visualization error:", error);
         if (error.message && (error.message.includes('429') || error.message.includes('Too Many Requests'))) {
