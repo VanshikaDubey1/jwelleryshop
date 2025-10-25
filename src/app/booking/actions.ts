@@ -2,10 +2,21 @@
 
 import 'dotenv/config';
 import { z } from 'zod';
-import { db, storage } from '@/lib/firebase';
+import { db, storage, initializeFirebase } from '@/lib/firebase';
 import { BookingSchema, type Booking } from '@/lib/types';
 import { addDoc, collection, serverTimestamp } from 'firebase/firestore';
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
+
+// Ensure Firebase is initialized with server-side config
+initializeFirebase({
+    apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
+    authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
+    projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
+    storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
+    messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
+    appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
+    measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID
+});
 
 function generateOrderId() {
     const prefix = 'SHP';
@@ -56,7 +67,7 @@ export async function submitBooking(prevState: any, formData: FormData) {
             createdAt: serverTimestamp(),
         });
 
-        return { success: true, orderId: orderId, error: null };
+        return { success: true, orderId: orderId, error: null, bookingData: validatedFields.data };
 
     } catch (error) {
         console.error('Error submitting booking:', error);
@@ -95,5 +106,3 @@ export async function sendToGoogleSheet(data: Booking) {
         return { success: false, error: 'Could not send data to Google Sheet.' };
     }
 }
-
-    
