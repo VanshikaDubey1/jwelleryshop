@@ -65,11 +65,11 @@ export const PHOTO_PRINTING_DETAILS = {
     name: "Photo Printing",
     options: {
       sizes: [
-        {"label": "4R", "dimensions": "4x6 in", "priceRange": "10–25", "notes": "Standard photo print"},
-        {"label": "5R", "dimensions": "5x7 in", "priceRange": "20–50", "notes": "Slightly larger than 4R"},
-        {"label": "6R", "dimensions": "6x8 in", "priceRange": "30–80", "notes": "Enlarged photo print"},
-        {"label": "A4", "dimensions": "8.3x11.7 in", "priceRange": "50–200", "notes": "Suitable for documents"},
-        {"label": "A3", "dimensions": "11.7x16.5 in", "priceRange": "100–300", "notes": "Larger posters"},
+        {"label": "4R", "dimensions": "4x6", "priceRange": "10–25", "notes": "Standard photo print"},
+        {"label": "5R", "dimensions": "5x7", "priceRange": "20–50", "notes": "Slightly larger than 4R"},
+        {"label": "6R", "dimensions": "6x8", "priceRange": "30–80", "notes": "Enlarged photo print"},
+        {"label": "A4", "dimensions": "8.3x11.7", "priceRange": "50–200", "notes": "Suitable for documents"},
+        {"label": "A3", "dimensions": "11.7x16.5", "priceRange": "100–300", "notes": "Larger posters"},
         {"label": "Poster", "dimensions": ">A3", "priceRange": "200+", "notes": "Custom sizes available"}
       ]
     },
@@ -89,11 +89,11 @@ export const PHOTO_ALBUM_DETAILS = {
     name: "Photo Album",
     options: {
       albums: [
-        {"type": "Mini Album", "size": "6x6 in", "price": 500},
-        {"type": "Small Album", "size": "8x8 in", "price": 800},
-        {"type": "Medium Album", "size": "11x8.5 in", "price": 1500},
-        {"type": "Large Album", "size": "12x12 in", "price": 2500},
-        {"type": "XL Album", "size": "15x12 in", "price": 4000},
+        {"type": "Mini Album", "size": "6x6", "price": 500},
+        {"type": "Small Album", "size": "8x8", "price": 800},
+        {"type": "Medium Album", "size": "11x8.5", "price": 1500},
+        {"type": "Large Album", "size": "12x12", "price": 2500},
+        {"type": "XL Album", "size": "15x12", "price": 4000},
         {"type": "Custom Album", "size": "Varies", "price": "As per request"}
       ]
     },
