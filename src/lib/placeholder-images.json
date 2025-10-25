@@ -33,7 +33,7 @@
     {
       "id": "home-hd-printing",
       "description": "A collection of assorted printed pictures on a surface.",
-      "imageUrl": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxwcmludGVkJTIwcGljdHVyZXN8ZW58MHx8fHwxNzE2NDEyNzI1fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-151746296421fdcec3f25b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxwZXJzb24lMjBwb3J0cmFpdCUyMHByaW50fGVufDB8fHx8MTc2MTM5MjM0NXww&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "printed pictures"
     },
     {
@@ -117,8 +117,8 @@
     {
       "id": "about-team",
       "description": "A close-up of a modern printing press in action.",
-      "imageUrl": "https://images.unsplash.com/reserve/uZYSV4nuQeyq64azfVIn_15130980706_64134efc6e_o.jpg?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHxwcmludGluZyUyMHByZXNzfGVufDB8fHx8MTc2MTMyMTg2NXww&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "printing press"
+      "imageUrl": "https://images.unsplash.com/photo-1626786011982-4148a0a8e030?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wzNjc5ODZ8MHwxfHNlYXJjaHwxfHxwcmludGluZyUyMG1hY2hpbmV8ZW58MHx8fHwxNzE3NzE1Mjk1fDA&ixlib=rb-4.0.3&q=80&w=1080",
+      "imageHint": "printing machine"
     }
   ]
 }
