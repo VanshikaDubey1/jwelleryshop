@@ -45,17 +45,23 @@ const visualizeInGalleryFlow = ai.defineFlow(
   },
   async ({photoDataUri, galleryStyle, size}) => {
     try {
-      const prompt = `A realistic, high-quality image showing a photo displayed as a '${galleryStyle}' print.
-${size ? `The print size is approximately ${size}.` : ''}
-- If the style is 'album', show the photo inside an open, elegant photo album on a clean tabletop.
-- If the style is 'acrylic', show the photo as a glossy acrylic print mounted on a modern, well-lit wall.
-- If the style is 'wallframe', show the photo in a stylish frame hanging on a decorated wall in a room.
-The scene should be well-composed and aesthetically pleasing, highlighting the product. The placeholder for the user's photo can be a generic but beautiful landscape or portrait.
-`;
+      const basePrompt = `Generate a realistic, high-quality image showing the provided photo displayed as a '${galleryStyle}' print.`;
+      const sizePrompt = size ? ` The print size is approximately ${size}.` : '';
+      const stylePrompt = {
+        album: "Show the photo inside an open, elegant photo album on a clean tabletop.",
+        acrylic: "Show the photo as a glossy acrylic print mounted on a modern, well-lit wall.",
+        wallframe: "Show the photo in a stylish frame hanging on a decorated wall in a room."
+      }[galleryStyle];
         
       const llmResponse = await ai.generate({
-          model: 'googleai/imagen-4.0-fast-generate-001',
-          prompt: prompt,
+          model: 'googleai/gemini-2.5-flash-image-preview',
+          prompt: [
+            { media: { url: photoDataUri } },
+            { text: `${basePrompt}${sizePrompt} ${stylePrompt} The scene should be well-composed and aesthetically pleasing, highlighting the product.` }
+          ],
+          config: {
+            responseModalities: ['TEXT', 'IMAGE'],
+          }
       });
       
       const imageUrl = llmResponse.media?.url;
