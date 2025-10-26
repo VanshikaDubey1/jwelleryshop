@@ -35,7 +35,7 @@ export default function ContactPage() {
                         description="Have a question or a project in mind? We'd love to hear from you. Reach out through the form below, or visit us at our shop."
                     />
 
-                    <div className="mt-20 grid lg:grid-cols-2 gap-16">
+                    <div className="mt-20 grid grid-cols-1 lg:grid-cols-2 gap-16">
                         <div className="bg-card p-8 rounded-lg shadow-lg">
                             <h3 className="text-2xl font-bold font-headline mb-6">Send us a Message</h3>
                             <ContactForm />
@@ -65,7 +65,7 @@ export default function ContactPage() {
                             
                             <div>
                                <h3 className="text-2xl font-bold font-headline mb-4">Connect on WhatsApp</h3>
-                               <Button asChild size="lg" className="bg-[#25D366] hover:bg-[#25D366]/90 text-white">
+                               <Button asChild size="lg" className="bg-[#25D366] hover:bg-[#25D366]/90 text-white w-full sm:w-auto">
                                     <Link href={BUSINESS_INFO.whatsappLink} target="_blank" rel="noopener noreferrer">
                                         <WhatsAppIcon />
                                         Chat with us

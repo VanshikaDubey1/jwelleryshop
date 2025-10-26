@@ -223,7 +223,7 @@ export function BookingForm() {
             onSubmit={form.handleSubmit(onSubmit)}
             className="space-y-8"
           >
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {/* Column 1 */}
               <div className="space-y-8">
                 <FormField
@@ -443,7 +443,7 @@ export function BookingForm() {
                         <RadioGroup
                           onValueChange={field.onChange}
                           defaultValue={field.value}
-                          className="flex space-x-4 pt-2"
+                          className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4 pt-2"
                         >
                           <FormItem className="flex items-center space-x-3 space-y-0">
                             <FormControl>
@@ -547,12 +547,12 @@ export function BookingForm() {
               </div>
             </div>
 
-            <div className="flex justify-end pt-8">
+            <div className="flex justify-center md:justify-end pt-8">
               <Button
                 type="submit"
                 size="lg"
                 disabled={isSubmitting}
-                className="bg-primary text-primary-foreground hover:bg-foreground hover:text-background"
+                className="w-full md:w-auto bg-primary text-primary-foreground hover:bg-foreground hover:text-background"
               >
                 {isSubmitting ? (
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" />

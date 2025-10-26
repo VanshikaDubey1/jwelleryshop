@@ -32,7 +32,7 @@ export default function ServicesPage() {
             description="We offer a curated selection of printing services, each executed with the highest standards of quality and attention to detail. Find the perfect fit for your memories."
           />
 
-          <div className="mt-20 grid lg:grid-cols-1 gap-12">
+          <div className="mt-20 grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-12">
             {/* Acrylic Printing */}
             {acrylicService && (
                 <ServiceCard 
@@ -58,7 +58,7 @@ export default function ServicesPage() {
                     </Table>
                      <div className="text-sm text-muted-foreground mt-4 space-y-2">
                         <p><strong>Thickness Option:</strong> Price doubles for 8mm thickness.</p>
-                        <div className="flex items-center gap-2"><strong>Frame Colors:</strong> 
+                        <div className="flex items-center gap-2 flex-wrap"><strong>Frame Colors:</strong> 
                             {ACRYLIC_PRINTING_DETAILS.options.frameColors.map(color => (
                                 <Badge key={color} variant="secondary">{color}</Badge>
                             ))}
