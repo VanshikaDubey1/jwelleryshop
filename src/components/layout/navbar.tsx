@@ -3,14 +3,14 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, Phone } from "lucide-react";
+import { Menu } from "lucide-react";
 import { useState } from "react";
 
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Logo } from "@/components/shared/logo";
-import { NAV_LINKS, BUSINESS_INFO } from "@/lib/config";
+import { NAV_LINKS } from "@/lib/config";
 
 export function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -69,11 +69,8 @@ export function Navbar() {
             <Logo />
           </div>
 
-          <Button asChild variant="ghost" size="icon">
-            <a href={`tel:${BUSINESS_INFO.contact}`} aria-label="Call us">
-              <Phone className="h-5 w-5" />
-            </a>
-          </Button>
+          <div className="w-10" />
+
         </div>
 
         {/* Desktop Menu */}
@@ -106,10 +103,6 @@ export function Navbar() {
             </nav>
             
             <div className="flex items-center justify-end space-x-4">
-                <a href={`tel:${BUSINESS_INFO.contact}`} className="flex items-center text-sm font-medium text-foreground/80 hover:text-primary transition-colors">
-                  <Phone className="mr-2 h-4 w-4" />
-                  {BUSINESS_INFO.contact}
-                </a>
                 <Button asChild>
                     <Link href="/booking">Book Now</Link>
                 </Button>
