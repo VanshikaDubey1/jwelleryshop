@@ -3,6 +3,7 @@ import { BUSINESS_INFO } from "@/lib/config";
 import { PlaceHolderImages } from "@/lib/placeholder-images";
 import Image from "next/image";
 import type { Metadata } from 'next';
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: 'About Us',
@@ -58,19 +59,25 @@ export default function AboutPage() {
           <PageHeader
             title="Find Us"
             subtitle="Our Location"
-            description="Visit our shop on Shivala Road. We're open from 10 AM to 8 PM and would love to meet you!"
+            description="Visit our shop on Shivala Road. We're open from 10 AM to 8 PM and would love to meet you! Click the map for directions."
           />
-          <div className="mt-12 aspect-w-16 aspect-h-9 rounded-lg overflow-hidden border shadow-lg">
-            <iframe
-              src={BUSINESS_INFO.googleMapsLink}
-              width="100%"
-              height="100%"
-              style={{ border: 0 }}
-              allowFullScreen={true}
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-            ></iframe>
-          </div>
+          <Link href={BUSINESS_INFO.googleMapsDirectionLink} target="_blank" rel="noopener noreferrer" className="block mt-12 aspect-w-16 aspect-h-9 rounded-lg overflow-hidden border shadow-lg group">
+            <div className="absolute inset-0 group-hover:scale-105 transition-transform duration-300">
+                <iframe
+                src={BUSINESS_INFO.googleMapsEmbedLink}
+                width="100%"
+                height="100%"
+                style={{ border: 0 }}
+                allowFullScreen={false}
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                tabIndex={-1}
+                ></iframe>
+            </div>
+             <div className="absolute inset-0 bg-black/30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <p className="text-white text-lg font-bold">Open in Google Maps</p>
+            </div>
+          </Link>
         </div>
       </section>
     </div>
