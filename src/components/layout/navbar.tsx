@@ -19,13 +19,8 @@ export function Navbar() {
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-16 items-center">
-        {/* Desktop Logo */}
-        <div className="mr-4 hidden md:flex">
-          <Logo />
-        </div>
-
         {/* Mobile Header */}
-        <div className="flex items-center justify-between w-full md:hidden">
+        <div className="flex w-full items-center justify-between md:hidden">
           <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
             <SheetTrigger asChild>
               <Button variant="ghost" size="icon">
@@ -77,45 +72,48 @@ export function Navbar() {
           <Button asChild variant="ghost" size="icon">
             <a href={`tel:${BUSINESS_INFO.contact}`} aria-label="Call us">
               <Phone className="h-5 w-5" />
-              <span className="sr-only">Call us</span>
             </a>
           </Button>
         </div>
 
-
         {/* Desktop Menu */}
-        <nav className="hidden md:flex flex-1 items-center justify-center space-x-6 text-sm font-medium">
-          {NAV_LINKS.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className={cn(
-                "transition-colors hover:text-primary",
-                pathname === link.href ? "text-primary font-semibold" : "text-foreground/60"
-              )}
-            >
-              {link.label}
-            </Link>
-          ))}
-           <Link
-              href="/track-order"
-              className={cn(
-                "transition-colors hover:text-primary",
-                pathname === "/track-order" ? "text-primary font-semibold" : "text-foreground/60"
-              )}
-            >
-              Track Order
-            </Link>
-        </nav>
-        
-        <div className="hidden md:flex items-center justify-end space-x-4">
-            <a href={`tel:${BUSINESS_INFO.contact}`} className="flex items-center text-sm font-medium text-foreground/80 hover:text-primary transition-colors">
-              <Phone className="mr-2 h-4 w-4" />
-              {BUSINESS_INFO.contact}
-            </a>
-            <Button asChild>
-                <Link href="/booking">Book Now</Link>
-            </Button>
+        <div className="hidden md:flex w-full items-center">
+            <div className="mr-4">
+              <Logo />
+            </div>
+            <nav className="flex-1 flex items-center justify-center space-x-6 text-sm font-medium">
+              {NAV_LINKS.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className={cn(
+                    "transition-colors hover:text-primary",
+                    pathname === link.href ? "text-primary font-semibold" : "text-foreground/60"
+                  )}
+                >
+                  {link.label}
+                </Link>
+              ))}
+              <Link
+                  href="/track-order"
+                  className={cn(
+                    "transition-colors hover:text-primary",
+                    pathname === "/track-order" ? "text-primary font-semibold" : "text-foreground/60"
+                  )}
+                >
+                  Track Order
+                </Link>
+            </nav>
+            
+            <div className="flex items-center justify-end space-x-4">
+                <a href={`tel:${BUSINESS_INFO.contact}`} className="flex items-center text-sm font-medium text-foreground/80 hover:text-primary transition-colors">
+                  <Phone className="mr-2 h-4 w-4" />
+                  {BUSINESS_INFO.contact}
+                </a>
+                <Button asChild>
+                    <Link href="/booking">Book Now</Link>
+                </Button>
+            </div>
         </div>
       </div>
     </header>
