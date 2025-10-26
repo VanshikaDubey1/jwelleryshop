@@ -1,15 +1,16 @@
+
 "use client";
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Phone } from "lucide-react";
 import { useState } from "react";
 
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Logo } from "@/components/shared/logo";
-import { NAV_LINKS } from "@/lib/config";
+import { NAV_LINKS, BUSINESS_INFO } from "@/lib/config";
 
 export function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -23,7 +24,7 @@ export function Navbar() {
         </div>
 
         {/* Mobile Menu */}
-        <div className="md:hidden">
+        <div className="flex w-full items-center justify-between md:hidden">
           <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
             <SheetTrigger asChild>
               <Button variant="ghost" size="icon">
@@ -31,36 +32,54 @@ export function Navbar() {
                 <span className="sr-only">Toggle Menu</span>
               </Button>
             </SheetTrigger>
-            <SheetContent side="left" className="pr-0">
-              <div className="flex flex-col h-full">
-                <div className="p-4 border-b">
-                  <Logo />
-                </div>
-                <nav className="flex-1 flex flex-col items-start space-y-2 p-4">
-                  {NAV_LINKS.map((link) => (
-                    <Link
-                      key={link.href}
-                      href={link.href}
-                      onClick={() => setIsMobileMenuOpen(false)}
-                      className={cn(
-                        "text-lg font-medium w-full text-left p-2 rounded-md transition-colors hover:bg-muted",
-                        pathname === link.href ? "text-primary" : "text-foreground"
-                      )}
-                    >
-                      {link.label}
-                    </Link>
-                  ))}
-                </nav>
+            <SheetContent side="left" className="pr-0 flex flex-col">
+              <div className="p-4 border-b">
+                <Logo />
               </div>
+              <nav className="flex-1 flex flex-col items-start space-y-2 p-4">
+                {NAV_LINKS.map((link) => (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className={cn(
+                      "text-lg font-medium w-full text-left p-2 rounded-md transition-colors hover:bg-muted",
+                      pathname === link.href ? "text-primary bg-muted" : "text-foreground"
+                    )}
+                  >
+                    {link.label}
+                  </Link>
+                ))}
+                <Link
+                  href="/track-order"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className={cn(
+                    "text-lg font-medium w-full text-left p-2 rounded-md transition-colors hover:bg-muted",
+                    pathname === "/track-order" ? "text-primary bg-muted" : "text-foreground"
+                  )}
+                >
+                  Track Order
+                </Link>
+              </nav>
+               <div className="mt-auto p-4 border-t">
+                  <Button asChild className="w-full" size="lg">
+                    <Link href="/booking" onClick={() => setIsMobileMenuOpen(false)}>Book Now</Link>
+                  </Button>
+                </div>
             </SheetContent>
           </Sheet>
-        </div>
-        
-        {/* Mobile Logo (center) */}
-        <div className="flex-1 flex justify-center md:hidden">
+          
+          <div className="flex-1 flex justify-center">
             <Logo />
+          </div>
+
+          <Button asChild variant="ghost" size="icon">
+            <a href={`tel:${BUSINESS_INFO.contact}`}>
+              <Phone className="h-5 w-5" />
+              <span className="sr-only">Call us</span>
+            </a>
+          </Button>
         </div>
-        <div className="w-10 md:hidden" /> {/* Spacer for mobile */}
 
 
         {/* Desktop Menu */}
@@ -79,7 +98,11 @@ export function Navbar() {
           ))}
         </nav>
         
-        <div className="hidden md:flex items-center justify-end">
+        <div className="hidden md:flex items-center justify-end space-x-4">
+            <a href={`tel:${BUSINESS_INFO.contact}`} className="hidden lg:flex items-center text-sm font-medium text-foreground/80 hover:text-primary transition-colors">
+              <Phone className="mr-2 h-4 w-4" />
+              {BUSINESS_INFO.contact}
+            </a>
             <Button asChild>
                 <Link href="/booking">Book Now</Link>
             </Button>
