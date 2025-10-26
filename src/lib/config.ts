@@ -8,7 +8,7 @@ export const BUSINESS_INFO = {
   email: 'shreejiphotobooks@gmail.com',
   workingHours: '10 AM – 8 PM',
   whatsappLink: 'https://wa.me/918840363642?text=Hi%20Shreeji%20Photobooks%2C%20I%20want%20to%20book%20a%20print.',
-  googleMapsLink: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3572.088694838024!2d80.3470023150353!3d26.45263298332768!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x399c3818f9c10931%3A0x25b44b94326f54c9!2sKesa%20Power%20House!5e0!3m2!1sen!2sin!4v1622368944512!5m2!1sen!2sin'
+  googleMapsLink: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3572.091338274644!2d80.34701287611216!3d26.4525547789478!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x399c381855999999%3A0x833f248e36b046b5!2sShreeji%20Photobooks!5e0!3m2!1sen!2sin!4v1720542385573!5m2!1sen!2sin'
 };
 
 export const NAV_LINKS = [
