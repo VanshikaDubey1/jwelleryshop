@@ -45,26 +45,17 @@ const visualizeInGalleryFlow = ai.defineFlow(
   },
   async ({photoDataUri, galleryStyle, size}) => {
     try {
+      const prompt = `A realistic, high-quality image showing a photo displayed as a '${galleryStyle}' print.
+${size ? `The print size is approximately ${size}.` : ''}
+- If the style is 'album', show the photo inside an open, elegant photo album on a clean tabletop.
+- If the style is 'acrylic', show the photo as a glossy acrylic print mounted on a modern, well-lit wall.
+- If the style is 'wallframe', show the photo in a stylish frame hanging on a decorated wall in a room.
+The scene should be well-composed and aesthetically pleasing, highlighting the product. The placeholder for the user's photo can be a generic but beautiful landscape or portrait.
+`;
+        
       const llmResponse = await ai.generate({
-          model: 'googleai/gemini-2.5-flash-image-preview',
-          prompt: [
-            { text: `You are an expert in visualizing images in different gallery styles.
-
-You will take the user's photo and visualize it as if it were displayed in the specified gallery style and size.
-
-Gallery Style: ${galleryStyle}
-${size ? `Size: ${size}` : ''}
-
-Based on the gallery style and size, create a realistic image that shows how the user's photo will look. Return only the generated image.
-
-If the gallery style is 'album', create an image showing the photo inside an open, high-quality photo album.
-If the gallery style is 'acrylic', create an image showing the photo as a glossy acrylic print of the specified size, perhaps mounted on a modern wall to give a sense of scale.
-If the gallery style is 'wallframe', create an image showing the photo in an elegant wall frame of the specified size, hanging in a well-lit room to give a sense of scale.`},
-            { media: { url: photoDataUri } }
-          ],
-          config: {
-            responseModalities: ['TEXT', 'IMAGE'],
-          }
+          model: 'googleai/imagen-4.0-fast-generate-001',
+          prompt: prompt,
       });
       
       const imageUrl = llmResponse.media?.url;
@@ -77,10 +68,10 @@ If the gallery style is 'wallframe', create an image showing the photo in an ele
       return {visualizedImage: imageUrl, error: undefined};
     } catch (error: any) {
         console.error("AI visualization error:", error);
-        if (error.message && (error.message.includes('429') || error.message.includes('Too Many Requests'))) {
+        if (error.message && (error.message.includes('429') || error.message.includes('Too Many Requests') || error.message.includes('resource has been exhausted'))) {
             return {
                 visualizedImage: '',
-                error: 'The AI is currently busy. Please wait a moment and try again.'
+                error: 'The AI is currently busy due to high demand. Please wait a moment and try again.'
             };
         }
         if(error.message) {
