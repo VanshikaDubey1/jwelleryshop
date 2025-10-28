@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useEffect, useState, useMemo } from 'react';
@@ -24,14 +25,17 @@ import { updateBookingStatus } from '../actions';
 import { useToast } from '@/hooks/use-toast';
 import { format } from 'date-fns';
 import { BookingStatusBadge } from '@/components/shared/booking-status-badge';
-import { Loader2 } from 'lucide-react';
+import { ChevronDown, ChevronRight, Loader2 } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
+import { Button } from '@/components/ui/button';
 
 export function BookingTable() {
   const [bookings, setBookings] = useState<BookingDocument[]>([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
   const { toast } = useToast();
+  const [openItems, setOpenItems] = useState<Record<string, boolean>>({});
 
   useEffect(() => {
     const q = query(collection(db, 'bookings'), orderBy('createdAt', 'desc'));
@@ -99,6 +103,10 @@ export function BookingTable() {
     );
   }
 
+  const toggleItem = (id: string) => {
+    setOpenItems(prev => ({ ...prev, [id]: !prev[id] }));
+  }
+
   return (
     <div className="w-full">
       <div className="mb-4">
@@ -122,11 +130,30 @@ export function BookingTable() {
                   </div>
                   <BookingStatusBadge status={booking.status} />
                 </div>
-                <div className="text-sm text-muted-foreground">
-                  <p><strong>Service:</strong> {booking.service}</p>
-                  <p><strong>Date:</strong> {format(new Date(booking.preferredDate), 'PPP')}</p>
-                  <p><strong>Qty:</strong> {booking.quantity}, <strong>Size:</strong> {booking.size}</p>
+                 <div className="text-sm text-muted-foreground">
+                    <p><strong>Date:</strong> {format(new Date(booking.preferredDate), 'PPP')}</p>
+                    <p><strong>Delivery:</strong> {booking.deliveryOption}</p>
                 </div>
+                
+                <Collapsible open={openItems[booking.id]} onOpenChange={() => toggleItem(booking.id)}>
+                    <CollapsibleTrigger asChild>
+                       <Button variant="ghost" className="w-full justify-start px-0">
+                           {openItems[booking.id] ? <ChevronDown className="h-4 w-4 mr-2" /> : <ChevronRight className="h-4 w-4 mr-2" />}
+                           View {booking.orderItems.length} Order Item(s)
+                       </Button>
+                    </CollapsibleTrigger>
+                    <CollapsibleContent className="space-y-3 pl-4 pt-2 border-l-2 ml-2">
+                        {booking.orderItems.map((item, index) => (
+                           <div key={index} className="text-sm text-muted-foreground border-b pb-2">
+                                <p><strong>Service:</strong> {item.service}</p>
+                                <p><strong>Qty:</strong> {item.quantity}, <strong>Size:</strong> {item.size}, <strong>Variant:</strong> {item.variant}</p>
+                                {item.frameColor && <p><strong>Frame:</strong> {item.frameColor}</p>}
+                                {item.itemNotes && <p><strong>Notes:</strong> {item.itemNotes}</p>}
+                           </div>
+                        ))}
+                    </CollapsibleContent>
+                </Collapsible>
+                
                 <Select
                     defaultValue={booking.status}
                     onValueChange={(newStatus) =>
@@ -160,7 +187,7 @@ export function BookingTable() {
             <TableRow>
               <TableHead>Order ID</TableHead>
               <TableHead>Customer</TableHead>
-              <TableHead>Service</TableHead>
+              <TableHead>Order Items</TableHead>
               <TableHead>Date</TableHead>
               <TableHead>Status</TableHead>
               <TableHead>Details</TableHead>
@@ -175,7 +202,14 @@ export function BookingTable() {
                     <div className="font-medium">{booking.name}</div>
                     <div className="text-sm text-muted-foreground">{booking.phone}</div>
                   </TableCell>
-                  <TableCell>{booking.service}</TableCell>
+                  <TableCell>
+                     {booking.orderItems.map((item, index) => (
+                           <div key={index} className="text-sm text-muted-foreground border-b last:border-b-0 py-1">
+                                <p><strong>{item.service}</strong> (x{item.quantity})</p>
+                                <p className="text-xs">{item.size} - {item.variant}</p>
+                           </div>
+                     ))}
+                  </TableCell>
                    <TableCell>
                      {format(new Date(booking.preferredDate), 'PPP')}
                    </TableCell>
@@ -201,9 +235,9 @@ export function BookingTable() {
                   </TableCell>
                   <TableCell>
                     <div className='text-sm'>
-                      <p><strong>Qty:</strong> {booking.quantity}</p>
-                      <p><strong>Size:</strong> {booking.size}</p>
-                      <p><strong>Type:</strong> {booking.deliveryOption}</p>
+                      <p><strong>Method:</strong> {booking.deliveryOption}</p>
+                       {booking.photoURLs && booking.photoURLs.length > 0 && <p><strong>Photos:</strong> {booking.photoURLs.length}</p>}
+                       {booking.generalNotes && <p><strong>Notes:</strong> {booking.generalNotes}</p>}
                     </div>
                   </TableCell>
                 </TableRow>

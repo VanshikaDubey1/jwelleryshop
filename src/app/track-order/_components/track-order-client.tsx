@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState, useEffect } from 'react';
@@ -14,6 +15,7 @@ import { Loader2, PackageSearch, Search } from 'lucide-react';
 import { BookingStatusBadge } from '@/components/shared/booking-status-badge';
 import { format } from 'date-fns';
 import { useSearchParams } from 'next/navigation';
+import { Separator } from '@/components/ui/separator';
 
 const formSchema = z.object({
   orderId: z.string().min(3, 'Please enter a valid Order ID.'),
@@ -53,7 +55,8 @@ export function TrackOrderClient() {
       form.setValue('orderId', orderIdFromUrl);
       handleSearch(orderIdFromUrl);
     }
-  }, [searchParams, form]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [searchParams, form.setValue]);
 
 
   const onSubmit = async (data: FormValues) => {
@@ -119,22 +122,28 @@ export function TrackOrderClient() {
                     <BookingStatusBadge status={booking.status} />
                   </div>
                 </CardHeader>
-                <CardContent className="grid gap-2 text-sm">
-                  <div className="flex justify-between">
-                    <span className="text-muted-foreground">Service:</span>
-                    <span className="font-medium">{booking.service}</span>
+                <CardContent className="grid gap-4 text-sm">
+                   <div>
+                    <h4 className='font-semibold mb-2'>Order Items</h4>
+                    <div className='space-y-2'>
+                        {booking.orderItems.map((item, index) => (
+                           <div key={index} className="p-2 rounded-md border bg-background/50">
+                               <p className='font-medium'>{item.service} (x{item.quantity})</p>
+                               <p className='text-muted-foreground text-xs'>{item.size} - {item.variant}</p>
+                           </div>
+                        ))}
+                    </div>
                   </div>
-                  <div className="flex justify-between">
-                    <span className="text-muted-foreground">Quantity:</span>
-                    <span className="font-medium">{booking.quantity}</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-muted-foreground">Delivery Method:</span>
-                    <span className="font-medium">{booking.deliveryOption}</span>
-                  </div>
-                   <div className="flex justify-between">
-                    <span className="text-muted-foreground">Preferred Date:</span>
-                    <span className="font-medium">{format(new Date(booking.preferredDate), 'PPP')}</span>
+                  <Separator />
+                  <div className="grid grid-cols-2 gap-2">
+                     <div className="flex justify-between">
+                        <span className="text-muted-foreground">Delivery Method:</span>
+                        <span className="font-medium">{booking.deliveryOption}</span>
+                    </div>
+                    <div className="flex justify-between">
+                        <span className="text-muted-foreground">Preferred Date:</span>
+                        <span className="font-medium">{format(new Date(booking.preferredDate), 'PPP')}</span>
+                    </div>
                   </div>
                 </CardContent>
               </Card>
@@ -145,5 +154,3 @@ export function TrackOrderClient() {
     </div>
   );
 }
-
-    

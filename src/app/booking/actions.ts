@@ -1,14 +1,12 @@
+
 'use server';
 
 import 'dotenv/config';
-import { z } from 'zod';
-import { db, storage, initializeFirebase } from '@/lib/firebase';
-import { BookingSchema, type Booking } from '@/lib/types';
+import { db, storage } from '@/lib/firebase';
+import { BookingSchema, type Booking, OrderItemSchema } from '@/lib/types';
 import { addDoc, collection, serverTimestamp } from 'firebase/firestore';
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
-
-// Ensure Firebase is initialized with server-side config
-initializeFirebase();
+import { z } from 'zod';
 
 function generateOrderId() {
     const prefix = 'SHP';
@@ -18,18 +16,24 @@ function generateOrderId() {
 }
 
 export async function submitBooking(prevState: any, formData: FormData) {
-    const rawData = Object.fromEntries(formData.entries());
-
-    const parsedData = {
-        ...rawData,
-        quantity: Number(rawData.quantity),
-        preferredDate: new Date(rawData.preferredDate as string),
+    
+    // As we are receiving a mix of strings, files, and JSON strings, we parse them manually
+    const rawData = {
+        name: formData.get('name'),
+        phone: formData.get('phone'),
+        email: formData.get('email'),
+        deliveryOption: formData.get('deliveryOption'),
+        address: formData.get('address'),
+        preferredDate: new Date(formData.get('preferredDate') as string),
+        generalNotes: formData.get('generalNotes'),
+        orderItems: JSON.parse(formData.get('orderItems') as string),
         photos: formData.getAll('photos'),
-    }
-
-    const validatedFields = BookingSchema.safeParse(parsedData);
+    };
+    
+    const validatedFields = BookingSchema.safeParse(rawData);
     
     if (!validatedFields.success) {
+        console.error("Form Validation Failed:", validatedFields.error.flatten());
         return {
             error: 'Invalid form data. Please check your entries.',
             fieldErrors: validatedFields.error.flatten().fieldErrors,
@@ -51,7 +55,7 @@ export async function submitBooking(prevState: any, formData: FormData) {
             }
         }
         
-        const docRef = await addDoc(collection(db, 'bookings'), {
+        await addDoc(collection(db, 'bookings'), {
             ...bookingData,
             orderId,
             photoURLs,
@@ -59,7 +63,7 @@ export async function submitBooking(prevState: any, formData: FormData) {
             createdAt: serverTimestamp(),
         });
 
-        return { success: true, orderId: orderId, error: null, bookingData: validatedFields.data };
+        return { success: true, orderId: orderId, error: null };
 
     } catch (error) {
         console.error('Error submitting booking:', error);
@@ -68,43 +72,5 @@ export async function submitBooking(prevState: any, formData: FormData) {
             orderId: null,
             error: 'An unexpected error occurred. Please try again.',
         };
-    }
-}
-
-export async function sendToGoogleSheet(data: Booking) {
-    const scriptURL = "https://script.google.com/macros/s/AKfycbw8_Pk5p4kElvgQPq0EPAv0tdTZY6AvQIi3zW2Ax8RzEd6xDP2_YBGLqU7m-sv0LHv5/exec";
-    
-    const sheetData = {
-        Name: data.name,
-        Phone: data.phone,
-        Email: data.email || '',
-        Service: data.service,
-        Size: data.size,
-        Variant: data.variant,
-        "Frame Color": data.frameColor || '',
-        Quantity: data.quantity,
-        Delivery: data.deliveryOption,
-        Address: data.address || '',
-        "Preferred Date": data.preferredDate.toLocaleDateString('en-IN'),
-        Note: data.notes || '',
-    };
-
-    try {
-        const response = await fetch(scriptURL, {
-          method: "POST",
-          body: JSON.stringify(sheetData),
-          headers: { "Content-Type": "application/json" },
-        });
-
-        if (!response.ok) {
-            // Try to get more info from the response if it fails
-            const errorText = await response.text();
-            throw new Error(`Google Sheet request failed: ${response.statusText} - ${errorText}`);
-        }
-
-        return { success: true, error: null };
-    } catch (error: any) {
-        console.error('Error sending to Google Sheet:', error);
-        return { success: false, error: error.message || 'Could not send data to Google Sheet.' };
     }
 }
