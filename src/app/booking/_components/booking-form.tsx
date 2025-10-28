@@ -355,16 +355,16 @@ export function BookingForm() {
                       <FormItem>
                         <FormLabel>Variant *</FormLabel>
                         <Select onValueChange={field.onChange} value={field.value}>
-                            <FormControl>
-                                <SelectTrigger>
-                                    <SelectValue placeholder="Select a variant" />
-                                </SelectTrigger>
-                            </FormControl>
-                            <SelectContent>
-                                {(variantOptions[service] || []).map(option => (
-                                    <SelectItem key={option} value={option}>{option}</SelectItem>
-                                ))}
-                            </SelectContent>
+                          <FormControl>
+                            <SelectTrigger>
+                                <SelectValue placeholder="Select a variant" />
+                            </SelectTrigger>
+                          </FormControl>
+                          <SelectContent>
+                              {(variantOptions[service] || []).map(option => (
+                                  <SelectItem key={option} value={option}>{option}</SelectItem>
+                              ))}
+                          </SelectContent>
                         </Select>
                         <FormMessage />
                       </FormItem>
