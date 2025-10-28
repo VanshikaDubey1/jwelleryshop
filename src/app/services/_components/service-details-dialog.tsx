@@ -30,6 +30,9 @@ export function ServiceDetailsDialog({ serviceTitle, details }: ServiceDetailsDi
             return PlaceHolderImages.find(img => img.id === 'service-photo-printing');
         }
         if (serviceTitle === 'Album Printing') {
+            if (sizeLabel.includes('Mini')) return PlaceHolderImages.find(img => img.id === 'album-mini');
+            if (sizeLabel.includes('Medium')) return PlaceHolderImages.find(img => img.id === 'album-medium');
+            if (sizeLabel.includes('XL')) return PlaceHolderImages.find(img => img.id === 'album-xl');
             return PlaceHolderImages.find(img => img.id === 'gallery-album-2');
         }
         return PlaceHolderImages.find(img => img.id === 'hero-2');

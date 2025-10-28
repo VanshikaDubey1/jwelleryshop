@@ -119,6 +119,24 @@
       "description": "A close-up of a modern printing press in action.",
       "imageUrl": "https://olympak.com/wp-content/uploads/sites/5/2018/01/commercial-printing-companies.jpg",
       "imageHint": "printing machine"
+    },
+    {
+      "id": "album-mini",
+      "description": "A small self-adhesive 6-ring mini photo album.",
+      "imageUrl": "https://assets-production.mochi.media/products/137639/photos/262819-self-adhesive-6-ring-a6-wide-photo-album-refill-b5d7a6.jpg",
+      "imageHint": "mini album"
+    },
+    {
+      "id": "album-medium",
+      "description": "A medium-sized photo album with a floral cover.",
+      "imageUrl": "https://m.media-amazon.com/images/I/71cZ-VhhZkL.__AC_SX300_SY300_QL70_ML2_.jpg",
+      "imageHint": "medium album"
+    },
+    {
+      "id": "album-xl",
+      "description": "A large, professional hardcover photo album.",
+      "imageUrl": "https://cms.cloudinary.vpsvc.com/image/upload/c_scale,dpr_auto,f_auto,q_auto:best,t_productPageHeroGalleryTransformation_v2,w_auto/India%20LOB/Photo%20Gifts/Photo%20Albums/IN_Photo-album_Hero-image_01",
+      "imageHint": "large album"
     }
   ]
 }
