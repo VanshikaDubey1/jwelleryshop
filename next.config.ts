@@ -124,6 +124,12 @@ const nextConfig: NextConfig = {
         hostname: 'www.images.photojaanic.com',
         port: '',
         pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'www.pikperfect.com',
+        port: '',
+        pathname: '/**',
       }
     ],
   },
