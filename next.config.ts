@@ -118,6 +118,12 @@ const nextConfig: NextConfig = {
         hostname: 'i.pinimg.com',
         port: '',
         pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'www.images.photojaanic.com',
+        port: '',
+        pathname: '/**',
       }
     ],
   },

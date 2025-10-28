@@ -87,7 +87,7 @@
     {
       "id": "gallery-wallframe-2",
       "description": "A single, large framed landscape photo above a sofa.",
-      "imageUrl": "https://images.unsplash.com/photo-1694287796165-9c82940081be?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxmcmFtZWQlMjBsYW5kc2NhcGV8ZW58MHx8fHwxNzYxMzE5MDI5fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1694287796165-9c82940081be?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxmcmFtZWQlMjBsYW5kc2NhcGV8ZW58MHx8fHwxNzYxMzE5MDI5fDA&ixlibrb-4.1.0&q=80&w=1080",
       "imageHint": "framed landscape"
     },
     {
@@ -105,13 +105,13 @@
     {
       "id": "testimonial-2",
       "description": "Avatar for a customer testimonial.",
-      "imageUrl": "https://images.unsplash.com/photo-1540569014015-19a7be504e3a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxwZXJzb24lMjBwb3J0cmFpdHxlbnwwfHx8fDE3NjEyMjc5NjN8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1540569014015-19a7be504e3a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxwZXJzb24lMjBwb3J0cmFpdHxlbnwwfHx8fDE3NjEyMjc5NjN8MA&ixlib-rb-4.1.0&q=80&w=1080",
       "imageHint": "person portrait"
     },
     {
       "id": "testimonial-3",
       "description": "Avatar for a customer testimonial.",
-      "imageUrl": "https://images.unsplash.com/photo-1580489944761-15a19d654956?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxzbWlsaW5nJTIwcGVyc29ufGVufDB8fHx8MTc2MTI2NTI5MXww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1580489944761-15a19d654956?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxzbWlsaW5nJTIwcGVyc29ufGVufDB8fHx8MTc2MTI2NTI5MXww&ixlib-rb-4.1.0&q=80&w=1080",
       "imageHint": "smiling person"
     },
     {
@@ -141,7 +141,7 @@
     {
       "id": "album-large",
       "description": "A large photo album with a floral cover.",
-      "imageUrl": "https://m.media-amazon.com/images/I/71cZ-VhhZkL.__AC_SX300_SY300_QL70_ML2_.jpg",
+      "imageUrl": "https://www.images.photojaanic.com/homepage/banners/uae/2023/productpage/Photobook/softcover/benefit-4.jpg",
       "imageHint": "large album"
     },
     {
