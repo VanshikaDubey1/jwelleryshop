@@ -1,3 +1,4 @@
+
 import { PageHeader } from "@/components/shared/page-header";
 import {
   ACRYLIC_PRINTING_DETAILS,
@@ -9,6 +10,14 @@ import type { Metadata } from "next";
 import { ServiceCard } from "./_components/service-card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "@/components/ui/collapsible";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
+
 
 export const metadata: Metadata = {
   title: "Our Services",
@@ -32,100 +41,124 @@ export default function ServicesPage() {
             description="We offer a curated selection of printing services, each executed with the highest standards of quality and attention to detail. Find the perfect fit for your memories."
           />
 
-          <div className="mt-20 grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-12">
+          <div className="mt-20 space-y-8">
             {/* Acrylic Printing */}
             {acrylicService && (
-                <ServiceCard 
-                    title={acrylicService.title}
-                    description={ACRYLIC_PRINTING_DETAILS.description}
-                    image={acrylicService.image}
-                >
-                    <Table>
-                        <TableHeader>
-                            <TableRow>
-                                <TableHead>Size</TableHead>
-                                <TableHead className="text-right">Price (3mm)</TableHead>
-                            </TableRow>
-                        </TableHeader>
-                        <TableBody>
-                            {ACRYLIC_PRINTING_DETAILS.options.sizes.map(s => (
-                                <TableRow key={s.size}>
-                                    <TableCell>{s.size}</TableCell>
-                                    <TableCell className="text-right">₹{s.price}</TableCell>
+                <Collapsible>
+                    <ServiceCard 
+                        title={acrylicService.title}
+                        description={ACRYLIC_PRINTING_DETAILS.description}
+                        image={acrylicService.image}
+                    />
+                    <CollapsibleContent className="mt-[-1rem] bg-card border border-t-0 rounded-b-lg p-6 pt-0 transition-all duration-300 data-[state=closed]:-translate-y-4 data-[state=closed]:opacity-0 data-[state=open]:opacity-100">
+                        <Table>
+                            <TableHeader>
+                                <TableRow>
+                                    <TableHead>Size</TableHead>
+                                    <TableHead className="text-right">Price (3mm)</TableHead>
                                 </TableRow>
-                            ))}
-                        </TableBody>
-                    </Table>
-                     <div className="text-sm text-muted-foreground mt-4 space-y-2">
-                        <p><strong>Thickness Option:</strong> Price doubles for 8mm thickness.</p>
-                        <div className="flex items-center gap-2 flex-wrap"><strong>Frame Colors:</strong> 
-                            {ACRYLIC_PRINTING_DETAILS.options.frameColors.map(color => (
-                                <Badge key={color} variant="secondary">{color}</Badge>
-                            ))}
+                            </TableHeader>
+                            <TableBody>
+                                {ACRYLIC_PRINTING_DETAILS.options.sizes.map(s => (
+                                    <TableRow key={s.size}>
+                                        <TableCell>{s.size}</TableCell>
+                                        <TableCell className="text-right">₹{s.price}</TableCell>
+                                    </TableRow>
+                                ))}
+                            </TableBody>
+                        </Table>
+                         <div className="text-sm text-muted-foreground mt-4 space-y-2">
+                            <p><strong>Thickness Option:</strong> Price doubles for 8mm thickness.</p>
+                            <div className="flex items-center gap-2 flex-wrap"><strong>Frame Colors:</strong> 
+                                {ACRYLIC_PRINTING_DETAILS.options.frameColors.map(color => (
+                                    <Badge key={color} variant="secondary">{color}</Badge>
+                                ))}
+                            </div>
                         </div>
-                    </div>
-                </ServiceCard>
+                        <div className="pt-6">
+                            <Button asChild className="w-full sm:w-auto">
+                                <Link href="/booking">Book This Service</Link>
+                            </Button>
+                        </div>
+                    </CollapsibleContent>
+                </Collapsible>
             )}
 
             {/* Photo Printing */}
             {photoService && (
-                <ServiceCard 
-                    title={photoService.title}
-                    description={PHOTO_PRINTING_DETAILS.description}
-                    image={photoService.image}
-                >
-                    <Table>
-                        <TableHeader>
-                            <TableRow>
-                                <TableHead>Label</TableHead>
-                                <TableHead>Dimensions</TableHead>
-                                <TableHead>Notes</TableHead>
-                                <TableHead className="text-right">Price Range</TableHead>
-                            </TableRow>
-                        </TableHeader>
-                        <TableBody>
-                            {PHOTO_PRINTING_DETAILS.options.sizes.map(s => (
-                                <TableRow key={s.label}>
-                                    <TableCell className="font-medium">{s.label}</TableCell>
-                                    <TableCell>{s.dimensions}</TableCell>
-                                    <TableCell className="text-muted-foreground">{s.notes}</TableCell>
-                                    <TableCell className="text-right">₹{s.priceRange}</TableCell>
+                 <Collapsible>
+                    <ServiceCard 
+                        title={photoService.title}
+                        description={PHOTO_PRINTING_DETAILS.description}
+                        image={photoService.image}
+                    />
+                    <CollapsibleContent className="mt-[-1rem] bg-card border border-t-0 rounded-b-lg p-6 pt-0 transition-all duration-300 data-[state=closed]:-translate-y-4 data-[state=closed]:opacity-0 data-[state=open]:opacity-100">
+                        <Table>
+                            <TableHeader>
+                                <TableRow>
+                                    <TableHead>Label</TableHead>
+                                    <TableHead>Dimensions</TableHead>
+                                    <TableHead>Notes</TableHead>
+                                    <TableHead className="text-right">Price Range</TableHead>
                                 </TableRow>
-                            ))}
-                        </TableBody>
-                    </Table>
-                </ServiceCard>
+                            </TableHeader>
+                            <TableBody>
+                                {PHOTO_PRINTING_DETAILS.options.sizes.map(s => (
+                                    <TableRow key={s.label}>
+                                        <TableCell className="font-medium">{s.label}</TableCell>
+                                        <TableCell>{s.dimensions}</TableCell>
+                                        <TableCell className="text-muted-foreground">{s.notes}</TableCell>
+                                        <TableCell className="text-right">₹{s.priceRange}</TableCell>
+                                    </TableRow>
+                                ))}
+                            </TableBody>
+                        </Table>
+                        <div className="pt-6">
+                            <Button asChild className="w-full sm:w-auto">
+                                <Link href="/booking">Book This Service</Link>
+                            </Button>
+                        </div>
+                    </CollapsibleContent>
+                </Collapsible>
             )}
             
             {/* Album Printing */}
             {albumService && (
-                <ServiceCard 
-                    title={albumService.title}
-                    description={PHOTO_ALBUM_DETAILS.description}
-                    image={albumService.image}
-                >
-                    <Table>
-                        <TableHeader>
-                            <TableRow>
-                                <TableHead>Album Type</TableHead>
-                                <TableHead>Size</TableHead>
-                                <TableHead className="text-right">Starting Price</TableHead>
-                            </TableRow>
-                        </TableHeader>
-                        <TableBody>
-                            {PHOTO_ALBUM_DETAILS.options.albums.map(a => (
-                                <TableRow key={a.type}>
-                                    <TableCell className="font-medium">{a.type}</TableCell>
-                                    <TableCell>{a.size}</TableCell>
-                                    <TableCell className="text-right">{typeof a.price === 'number' ? `₹${a.price}` : a.price}</TableCell>
+                <Collapsible>
+                    <ServiceCard 
+                        title={albumService.title}
+                        description={PHOTO_ALBUM_DETAILS.description}
+                        image={albumService.image}
+                    />
+                    <CollapsibleContent className="mt-[-1rem] bg-card border border-t-0 rounded-b-lg p-6 pt-0 transition-all duration-300 data-[state=closed]:-translate-y-4 data-[state=closed]:opacity-0 data-[state=open]:opacity-100">
+                        <Table>
+                            <TableHeader>
+                                <TableRow>
+                                    <TableHead>Album Type</TableHead>
+                                    <TableHead>Size</TableHead>
+                                    <TableHead className="text-right">Starting Price</TableHead>
                                 </TableRow>
-                            ))}
-                        </TableBody>
-                    </Table>
-                    <div className="text-sm text-muted-foreground mt-4">
-                        <p>Samples available in-store. Visit us to see the quality and finish.</p>
-                    </div>
-                </ServiceCard>
+                            </TableHeader>
+                            <TableBody>
+                                {PHOTO_ALBUM_DETAILS.options.albums.map(a => (
+                                    <TableRow key={a.type}>
+                                        <TableCell className="font-medium">{a.type}</TableCell>
+                                        <TableCell>{a.size}</TableCell>
+                                        <TableCell className="text-right">{typeof a.price === 'number' ? `₹${a.price}` : a.price}</TableCell>
+                                    </TableRow>
+                                ))}
+                            </TableBody>
+                        </Table>
+                        <div className="text-sm text-muted-foreground mt-4">
+                            <p>Samples available in-store. Visit us to see the quality and finish.</p>
+                        </div>
+                         <div className="pt-6">
+                            <Button asChild className="w-full sm:w-auto">
+                                <Link href="/booking">Book This Service</Link>
+                            </Button>
+                        </div>
+                    </CollapsibleContent>
+                </Collapsible>
             )}
 
           </div>
