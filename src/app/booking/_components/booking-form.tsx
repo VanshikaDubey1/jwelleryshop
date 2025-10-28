@@ -1,3 +1,5 @@
+
+
 'use client';
 
 import { useState, useEffect }from 'react';
@@ -178,6 +180,7 @@ export function BookingForm() {
           Variant: ${data.variant}
           Quantity: ${data.quantity}
           Delivery: ${data.deliveryOption}
+          Customer Phone: ${data.phone}
           Preferred Date: ${format(data.preferredDate, 'PPP')}
           ${data.frameColor ? `Frame Color: ${data.frameColor}` : ''}
           ${data.address ? `Address: ${data.address}` : ''}
@@ -380,7 +383,7 @@ export function BookingForm() {
                               <FormControl>
                                   <SelectTrigger>
                                       <SelectValue placeholder="Select a frame color" />
-                                  </Trigger>
+                                  </SelectTrigger>
                               </FormControl>
                               <SelectContent>
                                   {ACRYLIC_PRINTING_DETAILS.options.frameColors.map(color => (
@@ -504,7 +507,7 @@ export function BookingForm() {
                             />
                           </FormControl>
                           <FormMessage />
-                        </Item>
+                        </FormItem>
                       )}
                     />
                   </div>
@@ -560,7 +563,7 @@ export function BookingForm() {
                           className="resize-vertical min-h-[100px]"
                           {...field}
                         />
-FormControl>
+                      </FormControl>
                       <FormMessage />
                     </FormItem>
                   )}
@@ -589,5 +592,3 @@ FormControl>
     </Card>
   );
 }
-
-    
