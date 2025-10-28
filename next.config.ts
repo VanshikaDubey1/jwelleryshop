@@ -76,6 +76,36 @@ const nextConfig: NextConfig = {
         hostname: 'images.squarespace-cdn.com',
         port: '',
         pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'media1.pbwwcdn.net',
+        port: '',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'goodrich.com.sg',
+        port: '',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'down-my.img.susercontent.com',
+        port: '',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'photostudiokathmandu.com',
+        port: '',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'cdn.prod.website-files.com',
+        port: '',
+        pathname: '/**',
       }
     ],
   },

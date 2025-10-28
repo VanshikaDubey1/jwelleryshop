@@ -143,6 +143,36 @@
       "description": "A custom photo album with a picture of a couple on the cover.",
       "imageUrl": "https://images.squarespace-cdn.com/content/v1/59fc85e39f8dce881ce6cea3/1675807657601-1943OWQWUTCQ4JHVATK2/Photo-5.jpg",
       "imageHint": "custom album"
+    },
+    {
+      "id": "photo-printing-4r",
+      "description": "A person holding a 4R photo print.",
+      "imageUrl": "https://media1.pbwwcdn.net/pages/photo-prints/main-banner-mobile.jpg",
+      "imageHint": "4R print"
+    },
+    {
+      "id": "photo-printing-5r",
+      "description": "A 5R photo print in a stand.",
+      "imageUrl": "https://goodrich.com.sg/wp-content/uploads/2022/11/Photo-stand-5R-with-dimension-front.jpg",
+      "imageHint": "5R print"
+    },
+    {
+      "id": "photo-printing-6r",
+      "description": "A 6R photo print.",
+      "imageUrl": "https://down-my.img.susercontent.com/file/f1dfb8dd6bfa943e6ffbf2b09d95cce9",
+      "imageHint": "6R print"
+    },
+    {
+      "id": "photo-printing-a4",
+      "description": "An A4 sized photo print.",
+      "imageUrl": "https://photostudiokathmandu.com/storage/ECFfniCVjCq4iThhZKCaLAfhvFUmOX8CmLSTlskS.jpg",
+      "imageHint": "A4 print"
+    },
+    {
+      "id": "photo-printing-a3",
+      "description": "An A3 sized portrait print.",
+      "imageUrl": "https://cdn.prod.website-files.com/5c6e81f1e965e241a716e966/6655b597aec5de66e95ace7c_portrait-a3-prints.webp",
+      "imageHint": "A3 print"
     }
   ]
 }

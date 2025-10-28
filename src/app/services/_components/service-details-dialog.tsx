@@ -26,6 +26,11 @@ export function ServiceDetailsDialog({ serviceTitle, details }: ServiceDetailsDi
             return PlaceHolderImages.find(img => img.id === 'gallery-acrylic-1');
         }
         if (serviceTitle === 'Photo Printing') {
+            if(sizeLabel.includes('4R')) return PlaceHolderImages.find(img => img.id === 'photo-printing-4r');
+            if(sizeLabel.includes('5R')) return PlaceHolderImages.find(img => img.id === 'photo-printing-5r');
+            if(sizeLabel.includes('6R')) return PlaceHolderImages.find(img => img.id === 'photo-printing-6r');
+            if(sizeLabel.includes('A4')) return PlaceHolderImages.find(img => img.id === 'photo-printing-a4');
+            if(sizeLabel.includes('A3')) return PlaceHolderImages.find(img => img.id === 'photo-printing-a3');
             if(sizeLabel.includes('Poster')) return PlaceHolderImages.find(img => img.id === 'gallery-wallframe-2');
             return PlaceHolderImages.find(img => img.id === 'service-photo-printing');
         }
