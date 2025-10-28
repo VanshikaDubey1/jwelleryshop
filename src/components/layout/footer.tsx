@@ -14,7 +14,7 @@ export function Footer() {
     <footer className="bg-card text-card-foreground border-t">
       <div className="container mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 px-4 py-12 sm:px-6 lg:px-8">
         {/* About Section */}
-        <div className="md:col-span-2 lg:col-span-1">
+        <div className="col-span-1 md:col-span-2 lg:col-span-1">
           <Logo />
           <p className="mt-4 text-sm text-muted-foreground">{BUSINESS_INFO.tagline}</p>
         </div>

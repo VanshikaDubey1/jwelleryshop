@@ -65,7 +65,7 @@ export function Navbar() {
             </SheetContent>
           </Sheet>
           
-          <div className="flex-1 flex justify-center">
+          <div className="flex-1 flex justify-center md:hidden">
             <Logo />
           </div>
 

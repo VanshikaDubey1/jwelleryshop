@@ -359,7 +359,7 @@ export function BookingForm() {
                               <FormControl>
                                   <SelectTrigger>
                                       <SelectValue placeholder="Select a frame color" />
-                                  </SelectTrigger>
+                                  </Trigger>
                               </FormControl>
                               <SelectContent>
                                   {ACRYLIC_PRINTING_DETAILS.options.frameColors.map(color => (
@@ -483,7 +483,7 @@ export function BookingForm() {
                             />
                           </FormControl>
                           <FormMessage />
-                        </FormItem>
+                        </Item>
                       )}
                     />
                   </div>
@@ -547,7 +547,7 @@ export function BookingForm() {
               </div>
             </div>
 
-            <div className="flex justify-center md:justify-end pt-8">
+            <div className="flex justify-center pt-8">
               <Button
                 type="submit"
                 size="lg"

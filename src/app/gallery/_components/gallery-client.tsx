@@ -9,7 +9,7 @@ export function GalleryClient() {
     return (
         <Tabs defaultValue="albums" className="w-full">
             <div className="flex justify-center">
-                <TabsList className="grid w-full grid-cols-3 sm:w-auto sm:inline-flex">
+                <TabsList className="grid w-full grid-cols-3 max-w-sm sm:w-auto sm:inline-flex">
                     {Object.entries(GALLERY_CATEGORIES).map(([key, { title }]) => (
                         <TabsTrigger key={key} value={key}>
                             {title}

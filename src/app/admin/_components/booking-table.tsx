@@ -25,6 +25,7 @@ import { useToast } from '@/hooks/use-toast';
 import { format } from 'date-fns';
 import { BookingStatusBadge } from '@/components/shared/booking-status-badge';
 import { Loader2 } from 'lucide-react';
+import { Card, CardContent } from '@/components/ui/card';
 
 export function BookingTable() {
   const [bookings, setBookings] = useState<BookingDocument[]>([]);
@@ -108,7 +109,52 @@ export function BookingTable() {
           className="max-w-sm"
         />
       </div>
-      <div className="rounded-lg border">
+      {/* Mobile View */}
+      <div className="grid gap-4 md:hidden">
+        {filteredBookings.length > 0 ? (
+          filteredBookings.map((booking) => (
+            <Card key={booking.id}>
+              <CardContent className="p-4 grid gap-3">
+                <div className="flex justify-between items-start">
+                  <div>
+                    <div className="font-bold">{booking.name}</div>
+                    <div className="text-sm text-muted-foreground">{booking.orderId}</div>
+                  </div>
+                  <BookingStatusBadge status={booking.status} />
+                </div>
+                <div className="text-sm text-muted-foreground">
+                  <p><strong>Service:</strong> {booking.service}</p>
+                  <p><strong>Date:</strong> {format(new Date(booking.preferredDate), 'PPP')}</p>
+                  <p><strong>Qty:</strong> {booking.quantity}, <strong>Size:</strong> {booking.size}</p>
+                </div>
+                <Select
+                    defaultValue={booking.status}
+                    onValueChange={(newStatus) =>
+                      handleStatusChange(booking.id, newStatus)
+                    }
+                  >
+                    <SelectTrigger>
+                      <SelectValue placeholder="Update Status" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="Pending">Pending</SelectItem>
+                      <SelectItem value="Printing">Printing</SelectItem>
+                      <SelectItem value="Ready">Ready</SelectItem>
+                      <SelectItem value="Delivered">Delivered</SelectItem>
+                    </SelectContent>
+                  </Select>
+              </CardContent>
+            </Card>
+          ))
+        ) : (
+          <div className="text-center py-12 text-muted-foreground">
+            No bookings found.
+          </div>
+        )}
+      </div>
+
+      {/* Desktop View */}
+      <div className="rounded-lg border hidden md:block">
         <Table>
           <TableHeader>
             <TableRow>
