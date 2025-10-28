@@ -112,6 +112,12 @@ const nextConfig: NextConfig = {
         hostname: 'seyaimaging.com',
         port: '',
         pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'i.pinimg.com',
+        port: '',
+        pathname: '/**',
       }
     ],
   },
