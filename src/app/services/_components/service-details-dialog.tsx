@@ -33,6 +33,7 @@ export function ServiceDetailsDialog({ serviceTitle, details }: ServiceDetailsDi
             if (sizeLabel.includes('Mini')) return PlaceHolderImages.find(img => img.id === 'album-mini');
             if (sizeLabel.includes('Medium')) return PlaceHolderImages.find(img => img.id === 'album-medium');
             if (sizeLabel.includes('XL')) return PlaceHolderImages.find(img => img.id === 'album-xl');
+            if (sizeLabel.includes('Custom')) return PlaceHolderImages.find(img => img.id === 'album-custom');
             return PlaceHolderImages.find(img => img.id === 'gallery-album-2');
         }
         return PlaceHolderImages.find(img => img.id === 'hero-2');
