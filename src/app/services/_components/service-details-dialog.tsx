@@ -86,7 +86,6 @@ export function ServiceDetailsDialog({ serviceTitle, details }: ServiceDetailsDi
                             <TableRow>
                                 <TableHead>Label</TableHead>
                                 <TableHead>Dimensions (inches)</TableHead>
-                                <TableHead>Notes</TableHead>
                                 <TableHead className="text-right">Price</TableHead>
                             </TableRow>
                         </TableHeader>
@@ -95,7 +94,6 @@ export function ServiceDetailsDialog({ serviceTitle, details }: ServiceDetailsDi
                                 <TableRow key={s.label}>
                                     <TableCell className="font-medium">{s.label}</TableCell>
                                     <TableCell>{s.dimensions}</TableCell>
-                                    <TableCell className="text-muted-foreground">{s.notes}</TableCell>
                                     <TableCell className="text-right">₹{s.priceRange}</TableCell>
                                 </TableRow>
                             ))}
