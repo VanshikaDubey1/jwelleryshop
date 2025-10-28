@@ -6,7 +6,7 @@ import { Logo } from "../shared/logo";
 export function Footer() {
   const socialLinks = [
     { name: "Facebook", href: "#", icon: <Facebook className="h-6 w-6" /> },
-    { name: "Instagram", href: "#", icon: <Instagram className="h-6 w-6" /> },
+    { name: "Instagram", href: "https://www.instagram.com/shreeji.photobooks?igsh=a2NnbnRsMmMwYXZj", icon: <Instagram className="h-6 w-6" /> },
     { name: "Twitter", href: "#", icon: <Twitter className="h-6 w-6" /> },
   ];
 
@@ -66,7 +66,7 @@ export function Footer() {
           <h3 className="text-sm font-semibold tracking-wider uppercase font-headline">Follow Us</h3>
           <div className="mt-4 flex space-x-4">
             {socialLinks.map((social) => (
-              <a key={social.name} href={social.href} className="text-muted-foreground hover:text-primary">
+              <a key={social.name} href={social.href} className="text-muted-foreground hover:text-primary" target="_blank" rel="noopener noreferrer">
                 <span className="sr-only">{social.name}</span>
                 {social.icon}
               </a>
