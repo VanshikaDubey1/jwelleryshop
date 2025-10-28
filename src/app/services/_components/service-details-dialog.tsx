@@ -9,7 +9,6 @@ import { PlaceHolderImages } from "@/lib/placeholder-images";
 import type { ACRYLIC_PRINTING_DETAILS, PHOTO_ALBUM_DETAILS, PHOTO_PRINTING_DETAILS } from "@/lib/config";
 import Image from "next/image";
 import Link from "next/link";
-import { ScrollArea } from "@/components/ui/scroll-area";
 import { cn } from "@/lib/utils";
 
 type ServiceDetails = typeof ACRYLIC_PRINTING_DETAILS | typeof PHOTO_ALBUM_DETAILS | typeof PHOTO_PRINTING_DETAILS;
@@ -180,26 +179,20 @@ export function ServiceDetailsDialog({ serviceTitle, details }: ServiceDetailsDi
                     <DialogTitle className="font-headline text-2xl">{serviceTitle}</DialogTitle>
                     <DialogDescription>{details.description}</DialogDescription>
                 </DialogHeader>
-                <div className="grid md:grid-cols-2 gap-8 mt-4 max-h-[70vh]">
-                     <ScrollArea className="h-full">
-                        <div className="pr-4">
-                           {renderImages()}
+                <div className="grid md:grid-cols-2 gap-8 mt-4">
+                     <div className="pr-4">
+                        {renderImages()}
+                     </div>
+                     <div className="pr-4">
+                        {renderTable()}
+                         <div className="pt-6">
+                            <Button asChild className="w-full sm:w-auto">
+                                <Link href="/booking">Book This Service</Link>
+                            </Button>
                         </div>
-                     </ScrollArea>
-                     <ScrollArea className="h-full">
-                         <div className="pr-4">
-                            {renderTable()}
-                             <div className="pt-6">
-                                <Button asChild className="w-full sm:w-auto">
-                                    <Link href="/booking">Book This Service</Link>
-                                </Button>
-                            </div>
-                         </div>
-                     </ScrollArea>
+                     </div>
                 </div>
             </DialogContent>
         </Dialog>
     );
 }
-
-    
