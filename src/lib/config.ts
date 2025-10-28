@@ -148,10 +148,11 @@ export const GALLERY_CATEGORIES = {
   wallframes: {
     title: 'Wall Frames',
     images: [
-      getImage('gallery-wallframe-1'),
-      getImage('gallery-wallframe-2'),
-      getImage('gallery-wallframe-3'),
-      getImage('gallery-album-1'),
+      getImage('gallery-wallframe-new-1'),
+      getImage('gallery-wallframe-new-2'),
+      getImage('gallery-wallframe-new-3'),
+      getImage('gallery-wallframe-new-4'),
+      getImage('gallery-wallframe-new-5'),
     ]
   }
 };
@@ -180,3 +181,5 @@ export const TESTIMONIALS = [
 function getImage(id: string): ImagePlaceholder {
   return PlaceHolderImages.find(img => img.id === id) || PlaceHolderImages[0];
 }
+
+    

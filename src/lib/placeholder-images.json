@@ -145,6 +145,12 @@
       "imageHint": "large album"
     },
     {
+      "id": "album-xl-old",
+      "description": "A large, professional hardcover photo album.",
+      "imageUrl": "https://i.pinimg.com/736x/af/5e/e0/af5ee09615eba9926ef876583c053cb2.jpg",
+      "imageHint": "large album"
+    },
+    {
       "id": "album-xl",
       "description": "A large, professional hardcover photo album.",
       "imageUrl": "https://i.pinimg.com/736x/af/5e/e0/af5ee09615eba9926ef876583c053cb2.jpg",
@@ -215,6 +221,36 @@
       "description": "Acrylic prints on a wall.",
       "imageUrl": "https://albumdelhi.com/wp-content/uploads/2022/04/acrylic-prints-wallside.jpg",
       "imageHint": "acrylic prints"
+    },
+    {
+      "id": "gallery-wallframe-new-1",
+      "description": "A gallery wall with multiple framed photos.",
+      "imageUrl": "https://i.pinimg.com/1200x/05/bd/6c/05bd6cd6c34e9cb73cf7a3c4389d840f.jpg",
+      "imageHint": "gallery wall"
+    },
+    {
+      "id": "gallery-wallframe-new-2",
+      "description": "A single large framed photo on a wall.",
+      "imageUrl": "https://i.pinimg.com/736x/8c/06/0a/8c060a4bde825a66b1b1b4a6aefc686a.jpg",
+      "imageHint": "framed photo"
+    },
+    {
+      "id": "gallery-wallframe-new-3",
+      "description": "A set of three coordinated wall frames.",
+      "imageUrl": "https://i.pinimg.com/1200x/ae/63/dc/ae63dc0abd213fd422775a4b34d3419f.jpg",
+      "imageHint": "wall frames"
+    },
+    {
+      "id": "gallery-wallframe-new-4",
+      "description": "A grid of nine small square frames.",
+      "imageUrl": "https://i.pinimg.com/736x/ed/c0/93/edc093994030df879f869b08f01feb85.jpg",
+      "imageHint": "grid frames"
+    },
+    {
+      "id": "gallery-wallframe-new-5",
+      "description": "A large photo frame with a white border.",
+      "imageUrl": "https://i.pinimg.com/736x/84/51/a7/8451a7575ce0acf3b3cc365ce0dc083d.jpg",
+      "imageHint": "photo frame"
     }
   ]
 }
