@@ -85,7 +85,7 @@ export function ServiceDetailsDialog({ serviceTitle, details }: ServiceDetailsDi
                                 <TableHead>Label</TableHead>
                                 <TableHead>Dimensions (inches)</TableHead>
                                 <TableHead>Notes</TableHead>
-                                <TableHead className="text-right">Price Range</TableHead>
+                                <TableHead className="text-right">Price</TableHead>
                             </TableRow>
                         </TableHeader>
                         <TableBody>
@@ -145,7 +145,7 @@ export function ServiceDetailsDialog({ serviceTitle, details }: ServiceDetailsDi
                 {items.map((item, index) => {
                     const image = getImageForSize(item.label);
                     return (
-                        <div key={index} className="group relative">
+                        <div key={index} className="group relative overflow-hidden rounded-md">
                              {image && 
                                 <Image 
                                     src={image.imageUrl} 
@@ -153,10 +153,8 @@ export function ServiceDetailsDialog({ serviceTitle, details }: ServiceDetailsDi
                                     width={300}
                                     height={300}
                                     className={cn(
-                                        "w-full h-full rounded-md object-contain",
-                                        item.label.includes('A3') && "object-cover scale-110",
-                                        item.label.includes('XL') && "object-cover scale-125",
-                                        item.label.includes('5R') && "object-cover"
+                                        "w-full h-full object-contain transition-transform duration-300 group-hover:scale-110",
+                                        (item.label.includes('A3') || item.label.includes('XL') || item.label.includes('5R')) && "object-cover",
                                     )}
                                     data-ai-hint={image.imageHint}
                                 />
