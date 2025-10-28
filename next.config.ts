@@ -130,6 +130,18 @@ const nextConfig: NextConfig = {
         hostname: 'www.pikperfect.com',
         port: '',
         pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'files.printo.in',
+        port: '',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'omgs.in',
+        port: '',
+        pathname: '/**',
       }
     ],
   },

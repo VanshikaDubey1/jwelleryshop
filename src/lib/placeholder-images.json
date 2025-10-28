@@ -105,7 +105,7 @@
     {
       "id": "testimonial-2",
       "description": "Avatar for a customer testimonial.",
-      "imageUrl": "https://images.unsplash.com/photo-1540569014015-19a7be504e3a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxwZXJzb24lMjBwb3J0cmFpdHxlbnwwfHx8fDE3NjEyMjc5NjN8MA&ixlib-rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1540569014015-19a7be504e3a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxwZXJzb24lMjBwb3J0cmFpdHxlbnwwfHx8fDE3NjEyMjc5NjN8MA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "person portrait"
     },
     {
@@ -185,6 +185,18 @@
       "description": "An A3 sized portrait print.",
       "imageUrl": "https://cdn.prod.website-files.com/5c6e81f1e965e241a716e966/6655b597aec5de66e95ace7c_portrait-a3-prints.webp",
       "imageHint": "A3 print"
+    },
+    {
+      "id": "gallery-acrylic-new-1",
+      "description": "A premium acrylic print on a stand.",
+      "imageUrl": "https://files.printo.in/site/20220809_142359032078_48359b_Premium-Photo-Acrylic-Prints.jpg",
+      "imageHint": "acrylic print"
+    },
+    {
+      "id": "gallery-acrylic-new-2",
+      "description": "An acrylic print hanging on a wall.",
+      "imageUrl": "https://omgs.in/wp-content/uploads/2023/05/OMGS-wall-acryllic-min.jpg",
+      "imageHint": "acrylic wall"
     }
   ]
 }
