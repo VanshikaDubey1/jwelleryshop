@@ -156,8 +156,8 @@ export function ServiceDetailsDialog({ serviceTitle, details }: ServiceDetailsDi
                                     height={300}
                                     className={cn(
                                         "w-full h-full object-contain transition-transform duration-300",
-                                        (item.label.includes('A3') || item.label.includes('Large') || item.label.includes('5R')) && "object-cover",
-                                        (item.label.includes('XL')) && "object-cover group-hover:scale-125"
+                                        (item.label.includes('A3') || item.label.includes('5R')) && "object-cover",
+                                        (item.label.includes('XL Album')) && "object-cover group-hover:scale-125"
                                     )}
                                     data-ai-hint={image.imageHint}
                                 />
@@ -203,3 +203,5 @@ export function ServiceDetailsDialog({ serviceTitle, details }: ServiceDetailsDi
         </Dialog>
     );
 }
+
+    
