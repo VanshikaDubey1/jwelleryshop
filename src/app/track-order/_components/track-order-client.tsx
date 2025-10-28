@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -13,6 +13,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '
 import { Loader2, PackageSearch, Search } from 'lucide-react';
 import { BookingStatusBadge } from '@/components/shared/booking-status-badge';
 import { format } from 'date-fns';
+import { useSearchParams } from 'next/navigation';
 
 const formSchema = z.object({
   orderId: z.string().min(3, 'Please enter a valid Order ID.'),
@@ -24,6 +25,7 @@ export function TrackOrderClient() {
   const [booking, setBooking] = useState<BookingDocument | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
+  const searchParams = useSearchParams();
 
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
@@ -32,17 +34,30 @@ export function TrackOrderClient() {
     },
   });
 
-  const onSubmit = async (data: FormValues) => {
+  const handleSearch = async (orderId: string) => {
     setIsLoading(true);
     setBooking(null);
     setError(null);
-    const result = await getBookingByOrderId(data.orderId);
+    const result = await getBookingByOrderId(orderId);
     if (result.data) {
       setBooking(result.data);
     } else {
       setError(result.error || 'Something went wrong.');
     }
     setIsLoading(false);
+  }
+
+  useEffect(() => {
+    const orderIdFromUrl = searchParams.get('id');
+    if (orderIdFromUrl) {
+      form.setValue('orderId', orderIdFromUrl);
+      handleSearch(orderIdFromUrl);
+    }
+  }, [searchParams, form]);
+
+
+  const onSubmit = async (data: FormValues) => {
+    await handleSearch(data.orderId);
   };
 
   return (
@@ -130,3 +145,5 @@ export function TrackOrderClient() {
     </div>
   );
 }
+
+    

@@ -4,7 +4,7 @@ import { useState, useEffect }from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { BookingSchema, type Booking } from '@/lib/types';
-import { SERVICES, ACRYLIC_PRINTING_DETAILS, PHOTO_ALBUM_DETAILS, PHOTO_PRINTING_DETAILS } from '@/lib/config';
+import { SERVICES, ACRYLIC_PRINTING_DETAILS, PHOTO_ALBUM_DETAILS, PHOTO_PRINTING_DETAILS, BUSINESS_INFO } from '@/lib/config';
 import { submitBooking, sendToGoogleSheet } from '../actions';
 import { useToast } from '@/hooks/use-toast';
 import emailjs from '@emailjs/browser';
@@ -172,11 +172,32 @@ export function BookingForm() {
       const emailjsPublicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY;
 
       if (emailjsServiceId && emailjsTemplateId && emailjsPublicKey) {
+        const fullOrderDetails = `
+          Service: ${data.service}
+          Size: ${data.size}
+          Variant: ${data.variant}
+          Quantity: ${data.quantity}
+          Delivery: ${data.deliveryOption}
+          Preferred Date: ${format(data.preferredDate, 'PPP')}
+          ${data.frameColor ? `Frame Color: ${data.frameColor}` : ''}
+          ${data.address ? `Address: ${data.address}` : ''}
+          ${data.notes ? `Notes: ${data.notes}` : ''}
+        `;
+
         const templateParams = {
+          // For Admin
+          to_email: BUSINESS_INFO.email,
           order_id: result.orderId,
           customer_name: data.name,
           customer_phone: data.phone,
-          service: data.service,
+          customer_email: data.email || 'Not provided',
+          full_order_details: fullOrderDetails,
+          track_order_link: `${window.location.origin}/track-order?id=${result.orderId}`,
+          
+          // For Customer Confirmation (if you set up another template)
+          from_name: BUSINESS_INFO.name,
+          to_name: data.name,
+          message: `Your order #${result.orderId} has been confirmed. We will contact you shortly.`,
         };
 
         emailjs
@@ -539,7 +560,7 @@ export function BookingForm() {
                           className="resize-vertical min-h-[100px]"
                           {...field}
                         />
-                      </FormControl>
+FormControl>
                       <FormMessage />
                     </FormItem>
                   )}
@@ -568,3 +589,5 @@ export function BookingForm() {
     </Card>
   );
 }
+
+    
