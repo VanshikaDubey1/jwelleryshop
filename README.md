@@ -47,25 +47,6 @@ NEXT_PUBLIC_EMAILJS_PUBLIC_KEY=your-public-key
 ADMIN_EMAIL=your-admin-email@example.com
 ```
 
-### AI-Powered Visualization
-
-This application uses Genkit and the Gemini API to allow users to visualize their photos in different gallery styles (album, acrylic, wall frame). To run the AI flow locally, you'll need a `GOOGLE_API_KEY`. Add it to your `.env.local` file.
-
-```
-# .env.local
-
-# ... other variables
-GOOGLE_API_KEY=your-google-api-key
-```
-
-Then, run the Genkit development server in a separate terminal:
-
-```bash
-npm run genkit:dev
-```
-
-This will start the AI service that the main Next.js app communicates with.
-
 ## Firebase Setup
 
 This project uses Firebase for its backend services:
