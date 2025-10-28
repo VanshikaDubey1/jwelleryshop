@@ -127,6 +127,12 @@
       "imageHint": "mini album"
     },
     {
+      "id": "album-small",
+      "description": "A small, professional photo album with a dark cover.",
+      "imageUrl": "https://m.media-amazon.com/images/I/81dFN5Z9m+L._AC_SL1500_.jpg",
+      "imageHint": "small album"
+    },
+    {
       "id": "album-medium",
       "description": "A medium-sized photo album with a floral cover.",
       "imageUrl": "https://m.media-amazon.com/images/I/71cZ-VhhZkL.__AC_SX300_SY300_QL70_ML2_.jpg",

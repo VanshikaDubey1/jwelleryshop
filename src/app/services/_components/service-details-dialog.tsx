@@ -36,7 +36,9 @@ export function ServiceDetailsDialog({ serviceTitle, details }: ServiceDetailsDi
         }
         if (serviceTitle === 'Album Printing') {
             if (sizeLabel.includes('Mini')) return PlaceHolderImages.find(img => img.id === 'album-mini');
+            if (sizeLabel.includes('Small')) return PlaceHolderImages.find(img => img.id === 'album-small');
             if (sizeLabel.includes('Medium')) return PlaceHolderImages.find(img => img.id === 'album-medium');
+            if (sizeLabel.includes('Large')) return PlaceHolderImages.find(img => img.id === 'album-xl');
             if (sizeLabel.includes('XL')) return PlaceHolderImages.find(img => img.id === 'album-xl');
             if (sizeLabel.includes('Custom')) return PlaceHolderImages.find(img => img.id === 'album-custom');
             return PlaceHolderImages.find(img => img.id === 'gallery-album-2');
@@ -154,7 +156,8 @@ export function ServiceDetailsDialog({ serviceTitle, details }: ServiceDetailsDi
                                     height={300}
                                     className={cn(
                                         "w-full h-full object-contain transition-transform duration-300 group-hover:scale-110",
-                                        (item.label.includes('A3') || item.label.includes('XL') || item.label.includes('5R')) && "object-cover",
+                                        (item.label.includes('A3') || item.label.includes('Large') || item.label.includes('5R')) && "object-cover",
+                                        (item.label.includes('XL')) && "object-cover"
                                     )}
                                     data-ai-hint={image.imageHint}
                                 />
