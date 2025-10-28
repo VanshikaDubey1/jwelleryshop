@@ -139,6 +139,12 @@
       "imageHint": "medium album"
     },
     {
+      "id": "album-large",
+      "description": "A very large, professional hardcover photo album.",
+      "imageUrl": "https://cms.cloudinary.vpsvc.com/images/c_scale,dpr_2,f_auto,g_center,q_auto,w_1920/de-DE/s3-static/images/dam/blurb/lp/photo-books/blurb-photo-book-pro-lay-flat-2",
+      "imageHint": "very large album"
+    },
+    {
       "id": "album-xl",
       "description": "A large, professional hardcover photo album.",
       "imageUrl": "https://i.pinimg.com/736x/af/5e/e0/af5ee09615eba9926ef876583c053cb2.jpg",
