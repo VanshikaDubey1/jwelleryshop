@@ -140,13 +140,14 @@ export function ServiceDetailsDialog({ serviceTitle, details }: ServiceDetailsDi
                 {items.map((item, index) => {
                     const image = getImageForSize(item.label);
                     return (
-                        <div key={index} className="group relative aspect-w-1 aspect-h-1">
+                        <div key={index} className="group relative">
                              {image && 
                                 <Image 
                                     src={image.imageUrl} 
                                     alt={`${item.label} example`} 
-                                    fill
-                                    className="object-cover rounded-md"
+                                    width={300}
+                                    height={300}
+                                    className="w-full h-auto object-contain rounded-md"
                                     data-ai-hint={image.imageHint}
                                 />
                              }
