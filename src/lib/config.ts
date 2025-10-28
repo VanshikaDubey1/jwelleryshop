@@ -1,3 +1,4 @@
+
 import { ImagePlaceholder, PlaceHolderImages } from "./placeholder-images";
 
 export const BUSINESS_INFO = {
@@ -66,11 +67,11 @@ export const PHOTO_PRINTING_DETAILS = {
     name: "Photo Printing",
     options: {
       sizes: [
-        {"label": "4R", "dimensions": "4x6", "priceRange": "10–25", "notes": "Standard photo print"},
-        {"label": "5R", "dimensions": "5x7", "priceRange": "20–50", "notes": "Slightly larger than 4R"},
-        {"label": "6R", "dimensions": "6x8", "priceRange": "30–80", "notes": "Enlarged photo print"},
-        {"label": "A4", "dimensions": "8.3x11.7", "priceRange": "50–200", "notes": "Suitable for documents"},
-        {"label": "A3", "dimensions": "11.7x16.5", "priceRange": "100–300", "notes": "Larger posters"},
+        {"label": "4R", "dimensions": "4x6", "priceRange": "10", "notes": "Standard photo print"},
+        {"label": "5R", "dimensions": "5x7", "priceRange": "20", "notes": "Slightly larger than 4R"},
+        {"label": "6R", "dimensions": "6x8", "priceRange": "30", "notes": "Enlarged photo print"},
+        {"label": "A4", "dimensions": "8.3x11.7", "priceRange": "40", "notes": "Suitable for documents"},
+        {"label": "A3", "dimensions": "11.7x16.5", "priceRange": "50", "notes": "Larger posters"},
         {"label": "Poster", "dimensions": ">A3", "priceRange": "200+", "notes": "Custom sizes available"}
       ]
     },
