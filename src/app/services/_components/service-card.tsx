@@ -1,43 +1,39 @@
 
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { CollapsibleTrigger } from "@/components/ui/collapsible";
 import type { ImagePlaceholder } from "@/lib/placeholder-images";
-import { ChevronDown } from "lucide-react";
 import Image from "next/image";
 import type { ReactNode } from "react";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+
 
 type ServiceCardProps = {
   title: string;
   description: string;
   image: ImagePlaceholder;
+  children: ReactNode;
 };
 
-export function ServiceCard({ title, description, image }: ServiceCardProps) {
+export function ServiceCard({ title, description, image, children }: ServiceCardProps) {
   return (
-    <CollapsibleTrigger asChild>
-        <Card className="flex flex-col md:flex-row overflow-hidden transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 group bg-card border-border cursor-pointer w-full text-left rounded-lg data-[state=open]:rounded-b-none">
-            <div className="relative aspect-w-16 aspect-h-9 md:aspect-w-3 md:aspect-h-2 md:w-1/3">
-                <Image
-                    src={image.imageUrl}
-                    alt={image.description}
-                    fill
-                    className="object-cover"
-                    data-ai-hint={image.imageHint}
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-80 group-hover:opacity-100 transition-opacity"></div>
+    <Card className="flex flex-col md:flex-row overflow-hidden transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 group bg-card border-border rounded-lg">
+        <div className="relative aspect-w-16 aspect-h-9 md:aspect-w-3 md:aspect-h-2 md:w-1/3">
+            <Image
+                src={image.imageUrl}
+                alt={image.description}
+                fill
+                className="object-cover"
+                data-ai-hint={image.imageHint}
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-80 group-hover:opacity-100 transition-opacity"></div>
+        </div>
+        <div className="flex-1 flex items-center p-6">
+            <div className="flex-1">
+                <CardTitle className="font-headline text-2xl">{title}</CardTitle>
+                <CardDescription className="mt-2 text-base text-muted-foreground">{description}</CardDescription>
             </div>
-            <div className="flex-1 flex items-center p-6">
-                <div className="flex-1">
-                    <CardTitle className="font-headline text-2xl">{title}</CardTitle>
-                    <CardDescription className="mt-2 text-base text-muted-foreground">{description}</CardDescription>
-                </div>
-                <div className="ml-6 flex items-center gap-4">
-                    <Button variant="outline" className="hidden sm:inline-flex">Explore</Button>
-                    <ChevronDown className="h-6 w-6 text-primary transition-transform duration-300 group-data-[state=open]:rotate-180" />
-                </div>
+            <div className="ml-6 flex items-center gap-4">
+                {children}
             </div>
-        </Card>
-    </CollapsibleTrigger>
+        </div>
+    </Card>
   );
 }
