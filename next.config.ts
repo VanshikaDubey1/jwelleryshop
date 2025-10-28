@@ -142,6 +142,24 @@ const nextConfig: NextConfig = {
         hostname: 'omgs.in',
         port: '',
         pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'homafy.com',
+        port: '',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'printingstudio.in',
+        port: '',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'albumdelhi.com',
+        port: '',
+        pathname: '/**',
       }
     ],
   },

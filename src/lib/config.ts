@@ -114,7 +114,7 @@ export const SERVICES_HOME = [
     title: "Luxury Albums",
     specs: "Wedding, Baby, Travel\nCustom Designs",
     priceRange: "Price: ₹500 Onwards",
-    image: getImage("home-luxury-albums")
+image: getImage("home-luxury-albums")
   },
   {
     title: "Acrylic Frame Printing",
@@ -140,6 +140,9 @@ export const GALLERY_CATEGORIES = {
     images: [
       getImage('gallery-acrylic-new-1'),
       getImage('gallery-acrylic-new-2'),
+      getImage('gallery-acrylic-new-3'),
+      getImage('gallery-acrylic-new-4'),
+      getImage('gallery-acrylic-new-5'),
     ]
   },
   wallframes: {

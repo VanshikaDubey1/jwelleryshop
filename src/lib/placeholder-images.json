@@ -105,7 +105,7 @@
     {
       "id": "testimonial-2",
       "description": "Avatar for a customer testimonial.",
-      "imageUrl": "https://images.unsplash.com/photo-1540569014015-19a7be504e3a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxwZXJzb24lMjBwb3J0cmFpdHxlbnwwfHx8fDE3NjEyMjc5NjN8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1540569014015-19a7be504e3a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxwZXJzb24lMjBwb3J0cmFpdHxlbnwwfHx8fDE3NjEyMjc5NjN8MA&ixlibrb-4.1.0&q=80&w=1080",
       "imageHint": "person portrait"
     },
     {
@@ -197,6 +197,24 @@
       "description": "An acrylic print hanging on a wall.",
       "imageUrl": "https://omgs.in/wp-content/uploads/2023/05/OMGS-wall-acryllic-min.jpg",
       "imageHint": "acrylic wall"
+    },
+    {
+      "id": "gallery-acrylic-new-3",
+      "description": "An oil painting style frame.",
+      "imageUrl": "https://homafy.com/wp-content/uploads/2023/06/Oil-Painting-frame-300x300.jpg",
+      "imageHint": "oil painting frame"
+    },
+    {
+      "id": "gallery-acrylic-new-4",
+      "description": "An acrylic frame banner.",
+      "imageUrl": "https://printingstudio.in/cdn/shop/files/acrylic-frame-banner-1024x768.jpg?v=1712986278&width=1946",
+      "imageHint": "acrylic banner"
+    },
+    {
+      "id": "gallery-acrylic-new-5",
+      "description": "Acrylic prints on a wall.",
+      "imageUrl": "https://albumdelhi.com/wp-content/uploads/2022/04/acrylic-prints-wallside.jpg",
+      "imageHint": "acrylic prints"
     }
   ]
 }
