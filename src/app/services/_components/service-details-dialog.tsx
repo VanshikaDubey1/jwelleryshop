@@ -153,8 +153,9 @@ export function ServiceDetailsDialog({ serviceTitle, details }: ServiceDetailsDi
                                     width={300}
                                     height={300}
                                     className={cn(
-                                        "w-full h-auto rounded-md",
-                                        item.label.includes('A3') || item.label.includes('5R') ? "object-cover scale-110" : "object-contain"
+                                        "w-full h-full rounded-md object-contain",
+                                        item.label.includes('A3') && "object-cover scale-110",
+                                        item.label.includes('5R') && "object-cover"
                                     )}
                                     data-ai-hint={image.imageHint}
                                 />
