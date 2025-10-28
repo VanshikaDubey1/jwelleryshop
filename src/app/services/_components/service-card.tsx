@@ -25,12 +25,12 @@ export function ServiceCard({ title, description, image, children }: ServiceCard
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-80 group-hover:opacity-100 transition-opacity"></div>
         </div>
-        <div className="flex-1 flex items-center p-6">
+        <div className="flex-1 flex flex-col md:flex-row md:items-center p-6">
             <div className="flex-1">
                 <CardTitle className="font-headline text-2xl">{title}</CardTitle>
                 <CardDescription className="mt-2 text-base text-muted-foreground">{description}</CardDescription>
             </div>
-            <div className="ml-6 flex items-center gap-4">
+            <div className="mt-4 md:mt-0 md:ml-6 flex items-center gap-4">
                 {children}
             </div>
         </div>
