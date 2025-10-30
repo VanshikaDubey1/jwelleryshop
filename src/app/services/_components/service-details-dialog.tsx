@@ -6,7 +6,7 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, Di
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
 import { PlaceHolderImages } from "@/lib/placeholder-images";
-import type { ACRYLIC_PRINTING_DETAILS, PHOTO_ALBUM_DETAILS, PHOTO_PRINTING_DETAILS } from "@/lib/config";
+import { BUSINESS_INFO, type ACRYLIC_PRINTING_DETAILS, type PHOTO_ALBUM_DETAILS, type PHOTO_PRINTING_DETAILS } from "@/lib/config";
 import Image from "next/image";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
@@ -44,6 +44,8 @@ export function ServiceDetailsDialog({ serviceTitle, details }: ServiceDetailsDi
         }
         return PlaceHolderImages.find(img => img.id === 'hero-2');
     }
+    
+    const whatsappMessage = `Hi Shreeji Photobooks, I'm interested in ordering the ${serviceTitle}.`;
 
     const renderTable = () => {
         switch (serviceTitle) {
@@ -187,7 +189,7 @@ export function ServiceDetailsDialog({ serviceTitle, details }: ServiceDetailsDi
                         {renderTable()}
                          <div className="pt-6">
                             <Button asChild className="w-full sm:w-auto">
-                                <Link href="/booking">Book This Service</Link>
+                                <Link href={BUSINESS_INFO.getWhatsAppLink(whatsappMessage)} target="_blank" rel="noopener noreferrer">Order via WhatsApp</Link>
                             </Button>
                         </div>
                      </div>

@@ -10,11 +10,13 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Logo } from "@/components/shared/logo";
-import { NAV_LINKS } from "@/lib/config";
+import { NAV_LINKS, BUSINESS_INFO } from "@/lib/config";
 
 export function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const pathname = usePathname();
+
+  const bookNowMessage = "Hi Shreeji Photobooks, I'd like to place an order.";
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -59,7 +61,7 @@ export function Navbar() {
               </nav>
                <div className="mt-auto p-4 border-t">
                   <Button asChild className="w-full" size="lg">
-                    <Link href="/booking" onClick={() => setIsMobileMenuOpen(false)}>Book Now</Link>
+                    <Link href={BUSINESS_INFO.getWhatsAppLink(bookNowMessage)} target="_blank" rel="noopener noreferrer" onClick={() => setIsMobileMenuOpen(false)}>Book Now</Link>
                   </Button>
                 </div>
             </SheetContent>
@@ -104,7 +106,7 @@ export function Navbar() {
             
             <div className="flex items-center justify-end space-x-4">
                 <Button asChild>
-                    <Link href="/booking">Book Now</Link>
+                    <Link href={BUSINESS_INFO.getWhatsAppLink(bookNowMessage)} target="_blank" rel="noopener noreferrer">Book Now</Link>
                 </Button>
             </div>
         </div>

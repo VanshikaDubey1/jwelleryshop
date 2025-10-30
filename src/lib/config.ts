@@ -8,9 +8,13 @@ export const BUSINESS_INFO = {
   contact: '+918840363642',
   email: 'shreejiphotobooks@gmail.com',
   workingHours: '10 AM – 8 PM',
-  whatsappLink: 'https://wa.me/918840363642?text=Hi%20Shreeji%20Photobooks%2C%20I%20want%20to%20book%20a%20print.',
+  getWhatsAppLink: (message?: string) => {
+    const defaultMessage = "Hi Shreeji Photobooks, I'm interested in your printing services.";
+    const encodedMessage = encodeURIComponent(message || defaultMessage);
+    return `https://wa.me/918840363642?text=${encodedMessage}`;
+  },
   googleMapsEmbedLink: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3572.091338274644!2d80.34701287611216!3d26.4525547789478!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x399c381855999999%3A0x833f248e36b046b5!2sShreeji%20Photobooks!5e0!3m2!1sen!2sin!4v1720542385573!5m2!1sen!2sin',
-  googleMapsDirectionLink: 'https://www.google.com/maps/search/?api=1&query=36%2F156+Shivala+Road%2C+Near+Kesa+Power+House%2C+Kanpur%2C+Uttar+Pradesh'
+  googleMapsDirectionLink: 'https://www.google.com/maps/dir/?api=1&destination=Shreeji+Photobooks+36%2F156+Shivala+Road%2C+Near+Kesa+Power+House%2C+Kanpur%2C+Uttar+Pradesh'
 };
 
 export const NAV_LINKS = [
@@ -18,7 +22,6 @@ export const NAV_LINKS = [
   { href: "/about", label: "About" },
   { href: "/services", label: "Services" },
   { href: "/gallery", label: "Gallery" },
-  { href: "/booking", label: "Book Now" },
   { href: "/contact", label: "Contact" },
 ];
 

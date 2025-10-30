@@ -1,6 +1,7 @@
+
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { SERVICES_HOME } from "@/lib/config";
+import { SERVICES_HOME, BUSINESS_INFO } from "@/lib/config";
 import Image from "next/image";
 import Link from "next/link";
 import { PageHeader } from "../../shared/page-header";
@@ -16,7 +17,9 @@ export function ServicesHighlight() {
         />
 
         <div className="mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-          {SERVICES_HOME.map((service) => (
+          {SERVICES_HOME.map((service) => {
+            const message = `Hi Shreeji Photobooks, I'm interested in ordering the ${service.title}.`;
+            return (
              <Card key={service.title} className="flex flex-col overflow-hidden transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 group bg-card border-border">
                 <div className="relative aspect-w-4 aspect-h-3">
                   <Image
@@ -38,11 +41,12 @@ export function ServicesHighlight() {
                 </CardContent>
                 <CardFooter>
                   <Button asChild variant="outline" className="w-full border-primary text-primary hover:bg-primary hover:text-primary-foreground">
-                    <Link href="/booking">Order Now</Link>
+                    <Link href={BUSINESS_INFO.getWhatsAppLink(message)} target="_blank" rel="noopener noreferrer">Order Now</Link>
                   </Button>
                 </CardFooter>
               </Card>
-          ))}
+            )
+          })}
         </div>
         <div className="mt-12 text-center">
             <Button asChild>

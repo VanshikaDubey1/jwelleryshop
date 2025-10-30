@@ -1,3 +1,4 @@
+
 import { Button } from "@/components/ui/button";
 import { PlaceHolderImages } from "@/lib/placeholder-images";
 import Image from "next/image";
@@ -6,6 +7,7 @@ import { BUSINESS_INFO } from "@/lib/config";
 
 export function Hero() {
   const heroImage = PlaceHolderImages.find(img => img.id === 'hero-2');
+  const bookNowMessage = "Hi Shreeji Photobooks, I'd like to place an order for a print.";
 
   return (
     <section className="relative h-[70vh] md:h-[80vh] w-full flex items-center justify-center text-center text-white p-0">
@@ -31,7 +33,7 @@ export function Hero() {
         </p>
         <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
           <Button asChild size="lg">
-            <Link href="/booking">Book Your Print</Link>
+            <Link href={BUSINESS_INFO.getWhatsAppLink(bookNowMessage)} target="_blank" rel="noopener noreferrer">Book Your Print</Link>
           </Button>
            <Button asChild size="lg" variant="outline" className="border-white text-white bg-transparent hover:bg-white hover:text-black">
             <Link href="/services">View Services</Link>

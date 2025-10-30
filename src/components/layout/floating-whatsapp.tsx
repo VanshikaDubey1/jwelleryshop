@@ -1,3 +1,4 @@
+
 "use client";
 
 import { BUSINESS_INFO } from "@/lib/config";
@@ -40,7 +41,7 @@ export function FloatingWhatsApp() {
 
     return (
         <Link
-            href={BUSINESS_INFO.whatsappLink}
+            href={BUSINESS_INFO.getWhatsAppLink()}
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Chat on WhatsApp"

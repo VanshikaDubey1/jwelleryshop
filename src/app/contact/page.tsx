@@ -1,3 +1,4 @@
+
 import { PageHeader } from "@/components/shared/page-header";
 import { ContactForm } from "./_components/contact-form";
 import { BUSINESS_INFO } from "@/lib/config";
@@ -66,7 +67,7 @@ export default function ContactPage() {
                             <div>
                                <h3 className="text-2xl font-bold font-headline mb-4">Connect on WhatsApp</h3>
                                <Button asChild size="lg" className="bg-[#25D366] hover:bg-[#25D366]/90 text-white w-full sm:w-auto">
-                                    <Link href={BUSINESS_INFO.whatsappLink} target="_blank" rel="noopener noreferrer">
+                                    <Link href={BUSINESS_INFO.getWhatsAppLink()} target="_blank" rel="noopener noreferrer">
                                         <WhatsAppIcon />
                                         Chat with us
                                     </Link>
