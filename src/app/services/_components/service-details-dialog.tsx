@@ -22,7 +22,13 @@ export function ServiceDetailsDialog({ serviceTitle, details }: ServiceDetailsDi
     
     const getImageForSize = (sizeLabel: string) => {
         if (serviceTitle === 'Acrylic Printing') {
-            return PlaceHolderImages.find(img => img.id === 'gallery-acrylic-1');
+            if(sizeLabel.includes('12x9')) return PlaceHolderImages.find(img => img.id === 'acrylic-12x9');
+            if(sizeLabel.includes('11x11')) return PlaceHolderImages.find(img => img.id === 'acrylic-11x11-1');
+            if(sizeLabel.includes('16x12')) return PlaceHolderImages.find(img => img.id === 'acrylic-16x12');
+            if(sizeLabel.includes('16x16')) return PlaceHolderImages.find(img => img.id === 'acrylic-16x16');
+            if(sizeLabel.includes('21x15')) return PlaceHolderImages.find(img => img.id === 'acrylic-21x15');
+            if(sizeLabel.includes('35x23')) return PlaceHolderImages.find(img => img.id === 'acrylic-35x23');
+            return PlaceHolderImages.find(img => img.id === 'service-acrylic-printing');
         }
         if (serviceTitle === 'Photo Printing') {
             if(sizeLabel.includes('4R')) return PlaceHolderImages.find(img => img.id === 'photo-printing-4r');
@@ -198,3 +204,5 @@ export function ServiceDetailsDialog({ serviceTitle, details }: ServiceDetailsDi
         </Dialog>
     );
 }
+
+    

@@ -251,6 +251,48 @@
       "description": "A large photo frame with a white border.",
       "imageUrl": "https://i.pinimg.com/736x/84/51/a7/8451a7575ce0acf3b3cc365ce0dc083d.jpg",
       "imageHint": "photo frame"
+    },
+    {
+      "id": "acrylic-12x9",
+      "description": "A 12x9 acrylic print.",
+      "imageUrl": "https://m.media-amazon.com/images/I/713GvgVJ0mL._AC_SX569_.jpg",
+      "imageHint": "acrylic print"
+    },
+    {
+      "id": "acrylic-11x11-1",
+      "description": "An 11x11 acrylic print.",
+      "imageUrl": "https://photowinkel.com/wp-content/uploads/2023/11/07-2.jpg",
+      "imageHint": "acrylic print"
+    },
+    {
+      "id": "acrylic-11x11-2",
+      "description": "An 11x11 acrylic print.",
+      "imageUrl": "https://photowinkel.com/wp-content/uploads/2023/11/17-1.jpg",
+      "imageHint": "acrylic print"
+    },
+    {
+      "id": "acrylic-16x12",
+      "description": "A 16x12 acrylic print.",
+      "imageUrl": "https://photowinkel.com/wp-content/uploads/2023/11/17-1.jpg",
+      "imageHint": "acrylic print"
+    },
+    {
+      "id": "acrylic-16x16",
+      "description": "A 16x16 acrylic print.",
+      "imageUrl": "https://photowinkel.com/wp-content/uploads/2023/11/02-2.jpg",
+      "imageHint": "acrylic print"
+    },
+    {
+      "id": "acrylic-21x15",
+      "description": "A 21x15 acrylic print.",
+      "imageUrl": "https://photowinkel.com/wp-content/webp-express/webp-images/uploads/2023/11/04-2.jpg.webp",
+      "imageHint": "acrylic print"
+    },
+    {
+      "id": "acrylic-35x23",
+      "description": "A 35x23 acrylic print of Radha Krishna.",
+      "imageUrl": "https://5.imimg.com/data5/SELLER/Default/2025/9/541991469/RM/VK/AJ/56370199/11-5mm-radha-krishna-digital-art-photo-frame-1000x1000.png",
+      "imageHint": "radha krishna"
     }
   ]
 }
