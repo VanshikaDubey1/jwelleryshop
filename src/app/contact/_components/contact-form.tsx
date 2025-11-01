@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useForm } from 'react-hook-form';
@@ -18,6 +19,7 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
 import { Loader2, Send } from 'lucide-react';
+import emailjs from '@emailjs/browser';
 
 const initialState = {
   error: null,
@@ -54,9 +56,47 @@ export function ContactForm() {
         }
     }, [state, form, toast]);
 
+    const handleFormSubmit = async (data: ContactInquiry) => {
+        // Prepare form data for server action
+        const formData = new FormData();
+        formData.append('name', data.name);
+        formData.append('phone', data.phone);
+        formData.append('email', data.email || '');
+        formData.append('message', data.message);
+
+        // Also trigger server action to save to Firestore
+        formAction(formData);
+
+        // Send email via EmailJS
+        try {
+            const templateParams = {
+                from_name: data.name,
+                from_email: data.email || 'Not provided',
+                from_phone: data.phone,
+                message: data.message,
+            };
+
+            await emailjs.send(
+                process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
+                process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
+                templateParams,
+                process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
+            );
+            // Success is handled by the useActionState effect
+        } catch (error) {
+            console.error('EmailJS Error:', error);
+            toast({
+                title: 'Email Sending Error',
+                description: 'Could not send the email. Please try again.',
+                variant: 'destructive',
+            });
+        }
+    };
+
+
     return (
         <Form {...form}>
-            <form action={formAction} className="space-y-6">
+            <form onSubmit={form.handleSubmit(handleFormSubmit)} className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <FormField
                         control={form.control}
