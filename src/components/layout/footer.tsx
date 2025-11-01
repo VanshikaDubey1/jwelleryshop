@@ -1,5 +1,6 @@
+
 import { BUSINESS_INFO, NAV_LINKS } from "@/lib/config";
-import { Mail, Phone, Clock, MapPin, Facebook, Instagram, Twitter } from "lucide-react";
+import { Mail, Phone, Clock, MapPin, Facebook, Instagram, Twitter, User } from "lucide-react";
 import Link from "next/link";
 import { Logo } from "../shared/logo";
 
@@ -45,6 +46,10 @@ export function Footer() {
             <li className="flex items-start">
               <MapPin className="h-5 w-5 mr-3 mt-1 shrink-0 text-primary" />
               <span className="text-muted-foreground">{BUSINESS_INFO.address}</span>
+            </li>
+             <li className="flex items-center">
+              <User className="h-5 w-5 mr-3 shrink-0 text-primary" />
+              <span className="text-muted-foreground">{BUSINESS_INFO.owner}</span>
             </li>
             <li className="flex items-center">
               <Phone className="h-5 w-5 mr-3 shrink-0 text-primary" />

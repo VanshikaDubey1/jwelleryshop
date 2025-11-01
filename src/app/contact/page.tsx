@@ -2,7 +2,7 @@
 import { PageHeader } from "@/components/shared/page-header";
 import { ContactForm } from "./_components/contact-form";
 import { BUSINESS_INFO } from "@/lib/config";
-import { Clock, Mail, MapPin, Phone } from "lucide-react";
+import { Clock, Mail, MapPin, Phone, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import type { Metadata } from 'next';
@@ -48,6 +48,10 @@ export default function ContactPage() {
                                     <div className="flex items-start">
                                         <MapPin className="h-5 w-5 mr-4 mt-1 shrink-0 text-primary" />
                                         <span>{BUSINESS_INFO.address}</span>
+                                    </div>
+                                     <div className="flex items-center">
+                                        <User className="h-5 w-5 mr-4 shrink-0 text-primary" />
+                                        <span>{BUSINESS_INFO.owner}</span>
                                     </div>
                                     <div className="flex items-center">
                                         <Phone className="h-5 w-5 mr-4 shrink-0 text-primary" />

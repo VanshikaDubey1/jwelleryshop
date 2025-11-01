@@ -3,6 +3,7 @@ import { ImagePlaceholder, PlaceHolderImages } from "./placeholder-images";
 
 export const BUSINESS_INFO = {
   name: 'Shreeji Photobooks',
+  owner: 'Mr. Shailendra Verma',
   tagline: 'Turning Your Memories Into Art',
   address: '36/156 Shivala Road, Near Kesa Power House, Kanpur, Uttar Pradesh',
   contact: '+918840363642',
