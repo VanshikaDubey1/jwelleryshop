@@ -23,7 +23,7 @@ type ImageEditorProps = {
 type FormValues = {
     size: string;
     frameColor?: string;
-    photo: FileList | null;
+    photo: File | null;
 };
 
 const WhatsAppIcon = () => (
@@ -41,9 +41,9 @@ const WhatsAppIcon = () => (
 
 export function ImageEditor({ serviceTitle, details }: ImageEditorProps) {
     const [previewUrl, setPreviewUrl] = useState<string | null>(null);
-    const [selectedSizeLabel, setSelectedSizeLabel] = useState<string>('');
+    const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
-    const { control, handleSubmit, watch, register, formState: { errors }, setValue } = useForm<FormValues>({
+    const { control, handleSubmit, watch, formState: { errors }, setValue } = useForm<FormValues>({
         defaultValues: {
             size: '',
             frameColor: serviceTitle === "Acrylic Printing" ? (details.options as typeof ACRYLIC_PRINTING_DETAILS['options']).frameColors[0] : undefined,
@@ -57,6 +57,8 @@ export function ImageEditor({ serviceTitle, details }: ImageEditorProps) {
     const handlePhotoChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const file = event.target.files?.[0];
         if (file) {
+            setSelectedFile(file);
+            setValue('photo', file);
             const reader = new FileReader();
             reader.onloadend = () => {
                 setPreviewUrl(reader.result as string);
@@ -67,7 +69,13 @@ export function ImageEditor({ serviceTitle, details }: ImageEditorProps) {
     
     const removePhoto = () => {
         setPreviewUrl(null);
+        setSelectedFile(null);
         setValue('photo', null);
+        // Reset the file input
+        const fileInput = document.getElementById('photo-upload') as HTMLInputElement;
+        if (fileInput) {
+            fileInput.value = '';
+        }
     }
 
     const getWhatsAppMessage = (data: FormValues) => {
@@ -92,7 +100,7 @@ export function ImageEditor({ serviceTitle, details }: ImageEditorProps) {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {/* Editor Controls */}
             <Card className="lg:col-span-1 h-fit sticky top-24">
-                 <form onSubmit={handleSubmit(data => console.log(data))}>
+                 <form onSubmit={(e) => e.preventDefault()}>
                     <CardHeader>
                         <CardTitle>1. Customize Your Print</CardTitle>
                         <CardDescription>Select your preferred options below.</CardDescription>
@@ -106,11 +114,7 @@ export function ImageEditor({ serviceTitle, details }: ImageEditorProps) {
                                 control={control}
                                 rules={{ required: 'Please select a size.' }}
                                 render={({ field }) => (
-                                     <Select onValueChange={(value) => {
-                                         field.onChange(value);
-                                         const sizeLabel = sizes.find(s => (s.size || s.label) === value)?.label || value;
-                                         setSelectedSizeLabel(sizeLabel);
-                                     }} defaultValue={field.value}>
+                                     <Select onValueChange={field.onChange} defaultValue={field.value}>
                                         <SelectTrigger>
                                             <SelectValue placeholder="Select a size" />
                                         </SelectTrigger>
@@ -159,10 +163,7 @@ export function ImageEditor({ serviceTitle, details }: ImageEditorProps) {
                                     id="photo-upload" 
                                     className="hidden"
                                     accept="image/*"
-                                    {...register('photo', { 
-                                        required: 'A photo is required to place an order.',
-                                        onChange: handlePhotoChange
-                                    })}
+                                    onChange={handlePhotoChange}
                                 />
                                 <label 
                                     htmlFor="photo-upload"
@@ -176,7 +177,7 @@ export function ImageEditor({ serviceTitle, details }: ImageEditorProps) {
                                         <p className="text-xs text-muted-foreground">PNG, JPG, or WEBP</p>
                                     </div>
                                 </label>
-                                {errors.photo && <p className="text-sm text-destructive mt-1">{errors.photo.message}</p>}
+                                {errors.photo && !selectedFile && <p className="text-sm text-destructive mt-1">{errors.photo.message}</p>}
                              </div>
                         </div>
 
