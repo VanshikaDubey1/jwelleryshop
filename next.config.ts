@@ -90,7 +90,7 @@ const nextConfig: NextConfig = {
         pathname: '/**',
       },
       {
-        protocol: 'https://',
+        protocol: 'https',
         hostname: 'down-my.img.susercontent.com',
         port: '',
         pathname: '/**',
