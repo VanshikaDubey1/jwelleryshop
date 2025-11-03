@@ -5,7 +5,6 @@ import { useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -44,7 +43,7 @@ export function ImageEditor({ serviceTitle, details }: ImageEditorProps) {
     const [previewUrl, setPreviewUrl] = useState<string | null>(null);
     const [selectedSizeLabel, setSelectedSizeLabel] = useState<string>('');
 
-    const { control, handleSubmit, watch, register, formState: { errors } } = useForm<FormValues>({
+    const { control, handleSubmit, watch, register, formState: { errors }, setValue } = useForm<FormValues>({
         defaultValues: {
             size: '',
             frameColor: serviceTitle === "Acrylic Printing" ? (details.options as typeof ACRYLIC_PRINTING_DETAILS['options']).frameColors[0] : undefined,
@@ -65,6 +64,11 @@ export function ImageEditor({ serviceTitle, details }: ImageEditorProps) {
             reader.readAsDataURL(file);
         }
     };
+    
+    const removePhoto = () => {
+        setPreviewUrl(null);
+        setValue('photo', null);
+    }
 
     const getWhatsAppMessage = (data: FormValues) => {
         let message = `Hi Shreeji Photobooks, I'd like to order a custom ${serviceTitle}.\n\n`;
@@ -146,7 +150,7 @@ export function ImageEditor({ serviceTitle, details }: ImageEditorProps) {
                             </div>
                         )}
                         
-                         {/* File Upload */}
+                        {/* File Upload */}
                         <div>
                              <Label>2. Upload Your Photo</Label>
                              <div className="mt-2">
@@ -216,7 +220,7 @@ export function ImageEditor({ serviceTitle, details }: ImageEditorProps) {
                                     variant="destructive"
                                     size="icon"
                                     className="absolute top-2 right-2 z-10 h-8 w-8"
-                                    onClick={() => setPreviewUrl(null)}
+                                    onClick={removePhoto}
                                 >
                                     <X className="h-4 w-4" />
                                 </Button>
