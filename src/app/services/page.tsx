@@ -9,6 +9,9 @@ import {
 import type { Metadata } from "next";
 import { ServiceCard } from "./_components/service-card";
 import { ServiceDetailsDialog } from "./_components/service-details-dialog";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 
 
 export const metadata: Metadata = {
@@ -40,10 +43,11 @@ export default function ServicesPage() {
                   description={ACRYLIC_PRINTING_DETAILS.description}
                   image={acrylicService.image}
               >
-                <ServiceDetailsDialog 
-                  serviceTitle={acrylicService.title}
-                  details={ACRYLIC_PRINTING_DETAILS}
-                />
+                <Button asChild>
+                  <Link href="/customize/acrylic">
+                    Customize <ArrowRight className="ml-2 h-4 w-4" />
+                  </Link>
+                </Button>
               </ServiceCard>
             )}
 
@@ -53,10 +57,11 @@ export default function ServicesPage() {
                   description={PHOTO_PRINTING_DETAILS.description}
                   image={photoService.image}
               >
-                 <ServiceDetailsDialog 
-                  serviceTitle={photoService.title}
-                  details={PHOTO_PRINTING_DETAILS}
-                />
+                 <Button asChild>
+                  <Link href="/customize/photo">
+                     Customize <ArrowRight className="ml-2 h-4 w-4" />
+                  </Link>
+                </Button>
               </ServiceCard>
             )}
             
@@ -79,3 +84,4 @@ export default function ServicesPage() {
     </div>
   );
 }
+
