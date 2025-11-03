@@ -9,11 +9,10 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { UploadCloud, WhatsApp, X, Image as ImageIcon } from "lucide-react";
+import { UploadCloud, X, Image as ImageIcon } from "lucide-react";
 import Image from 'next/image';
 import { cn } from '@/lib/utils';
 import { BUSINESS_INFO, type ACRYLIC_PRINTING_DETAILS, type PHOTO_PRINTING_DETAILS } from '@/lib/config';
-import Link from 'next/link';
 
 type ServiceDetails = typeof ACRYLIC_PRINTING_DETAILS | typeof PHOTO_PRINTING_DETAILS;
 
@@ -27,6 +26,18 @@ type FormValues = {
     frameColor?: string;
     photo: FileList | null;
 };
+
+const WhatsAppIcon = () => (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="currentColor"
+    >
+      <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
+    </svg>
+  );
 
 export function ImageEditor({ serviceTitle, details }: ImageEditorProps) {
     const [previewUrl, setPreviewUrl] = useState<string | null>(null);
@@ -174,7 +185,7 @@ export function ImageEditor({ serviceTitle, details }: ImageEditorProps) {
                                 window.open(BUSINESS_INFO.getWhatsAppLink(message), '_blank');
                             })}
                         >
-                            <WhatsApp className="mr-2 h-5 w-5" />
+                            <WhatsAppIcon />
                             Order on WhatsApp
                         </Button>
                     </CardFooter>
