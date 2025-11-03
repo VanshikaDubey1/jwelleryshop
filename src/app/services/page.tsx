@@ -43,11 +43,10 @@ export default function ServicesPage() {
                   description={ACRYLIC_PRINTING_DETAILS.description}
                   image={acrylicService.image}
               >
-                <Button asChild>
-                  <Link href="/customize/acrylic">
-                    Customize <ArrowRight className="ml-2 h-4 w-4" />
-                  </Link>
-                </Button>
+                <ServiceDetailsDialog 
+                  serviceTitle={acrylicService.title}
+                  details={ACRYLIC_PRINTING_DETAILS}
+                />
               </ServiceCard>
             )}
 
@@ -57,11 +56,10 @@ export default function ServicesPage() {
                   description={PHOTO_PRINTING_DETAILS.description}
                   image={photoService.image}
               >
-                 <Button asChild>
-                  <Link href="/customize/photo">
-                     Customize <ArrowRight className="ml-2 h-4 w-4" />
-                  </Link>
-                </Button>
+                <ServiceDetailsDialog 
+                  serviceTitle={photoService.title}
+                  details={PHOTO_PRINTING_DETAILS}
+                />
               </ServiceCard>
             )}
             
@@ -84,4 +82,3 @@ export default function ServicesPage() {
     </div>
   );
 }
-
