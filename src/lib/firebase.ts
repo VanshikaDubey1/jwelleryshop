@@ -17,13 +17,13 @@ const firebaseConfig = {
 };
 
 function initializeFirebase(config?: FirebaseOptions) {
-    return !getApps().length ? initializeApp(config || firebaseConfig) : getApp();
+    return getApps().length ? getApp() : initializeApp(config || firebaseConfig);
 }
 
 const app = initializeFirebase();
 const db = getFirestore(app);
 const storage = getStorage(app);
-const auth = typeof window !== "undefined" ? getAuth(app) : null;
+const auth = getAuth(app);
 
 
 export { app, db, storage, auth, initializeFirebase };

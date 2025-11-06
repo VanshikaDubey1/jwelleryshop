@@ -46,7 +46,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const signOut = async () => {
     setLoading(true);
     await firebaseSignOut(auth);
-    router.push('/login');
+    // Use window.location for a more reliable client-side redirect after sign-out.
+    window.location.href = '/login';
     setLoading(false);
   };
 
